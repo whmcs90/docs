@@ -24,9 +24,24 @@
   "openapi": "openapi.yaml",
   "navigation": [
     {
+      "group": "Welcome",
+      "pages": [
+        "index"
+      ]
+    },
+    {
       "group": "API Reference",
       "pages": [
-        "api-reference/introduction"
+        "api-reference/introduction",
+        "api-reference/check-number",
+        "api-reference/send",
+        "api-reference/send-group",
+        "api-reference/send-location",
+        "api-reference/send-poll",
+        "api-reference/groups",
+        "api-reference/instance/qr",
+        "api-reference/instance/state",
+        "api-reference/instance/logout"
       ]
     }
   ]
