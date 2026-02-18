@@ -1,0 +1,586 @@
+openapi: 3.0.0
+info:
+  title: Wachat API Reference
+  version: 1.0.0
+  description: |
+    Welcome to the official **Wachat API**. Use this documentation to integrate WhatsApp capabilities into your workflow. 
+    Our API provides a high-level wrapper over Evolution API, including plan management, messaging, and group controls.
+    
+    **Base URL:** `https://app.wachat.net/api/v1`
+  contact:
+    name: Wachat Support
+    url: https://www.wachat.net/contact
+
+servers:
+  - url: https://app.wachat.net/api/v1
+    description: Production Server
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-token
+      description: Your Wachat API Token.
+
+# Global security: Ini memastikan tombol "Try It" selalu meminta x-api-token
+security:
+  - ApiKeyAuth: []
+
+tags:
+  - name: Messaging
+    description: Send text, media, location, and polls.
+  - name: Instance
+    description: Manage connection state, QR codes, and sessions.
+  - name: Groups
+    description: Interact with WhatsApp Groups.
+  - name: Utilities
+    description: Helper endpoints like number validation.
+
+paths:
+  # --- SEND TEXT ---
+  /send#text:
+    post:
+      tags: [Messaging]
+      summary: Send Text Message
+      operationId: sendText
+      description: |
+        Send a standard WhatsApp text message to an individual or group. 
+        Ensure your instance is connected (status: open) before sending.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [instanceName, number, type, message]
+              properties:
+                instanceName:
+                  type: string
+                  description: "The name of your active instance."
+                  example: "Wachat_Primary"
+                number:
+                  type: string
+                  description: "Recipient phone number in international format (e.g., 62812...)."
+                  example: "628123456789"
+                type:
+                  type: string
+                  enum: [text]
+                  description: "Must be set to 'text' for this endpoint."
+                  example: "text"
+                message:
+                  type: string
+                  description: "The text content. Supports emojis and links."
+                  example: "Hello! This is a test message from Wachat."
+      responses:
+        '200':
+          description: Text message sent successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean, example: true }
+                  data: { type: object }
+        '401':
+          description: "Unauthorized - Invalid API Token."
+        '402':
+          description: "Payment Required - Plan or trial has expired."
+        '403':
+          description: "Forbidden - Message quota exceeded."
+        '404':
+          description: "Not Found - Instance not found for this team."
+
+  # --- SEND IMAGE/VIDEO ---
+  /send#media:
+    post:
+      tags: [Messaging]
+      summary: Send Image or Video
+      operationId: sendMedia
+      description: |
+        Send images (JPG/PNG) or videos (MP4) to a contact. 
+        The media will be displayed with a visual preview in the chat and can include an optional caption.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [instanceName, number, type, mediaUrl]
+              properties:
+                instanceName:
+                  type: string
+                  description: "Your unique WhatsApp instance name."
+                  example: "Wachat_Primary"
+                number:
+                  type: string
+                  description: "Recipient phone number in international format (without +)."
+                  example: "628123456789"
+                type:
+                  type: string
+                  enum: [image, video]
+                  description: "Specify whether you are sending an image or a video."
+                  example: "image"
+                mediaUrl:
+                  type: string
+                  format: uri
+                  description: "The public direct URL of the media file."
+                  example: "https://example.com/photo.jpg"
+                message:
+                  type: string
+                  description: "Optional caption text to accompany the media."
+                  example: "Check out our new catalog!"
+      responses:
+        '200':
+          description: Media sent successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean, example: true }
+                  data: { type: object }
+        '400': { description: "Bad Request - Check if URL is valid or parameters are missing." }
+        '401': { description: "Unauthorized - API Token is invalid." }
+        '402': { description: "Payment Required - Plan expired." }
+        '403': { description: "Forbidden - Message limit reached." }
+
+  # --- SEND DOCUMENT ---
+  /send#document:
+    post:
+      tags: [Messaging]
+      summary: Send Document
+      operationId: sendDocument
+      description: |
+        Send PDF, DOCX, XLSX, or any other file formats as a WhatsApp document. 
+        Unlike images/videos, documents are sent without a preview but preserve their original quality and file name.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [instanceName, number, type, mediaUrl]
+              properties:
+                instanceName:
+                  type: string
+                  description: "Your WhatsApp instance name."
+                  example: "Wachat_Primary"
+                number:
+                  type: string
+                  description: "Recipient phone number (e.g., 62812...)."
+                  example: "628123456789"
+                type:
+                  type: string
+                  enum: [document]
+                  example: "document"
+                mediaUrl:
+                  type: string
+                  format: uri
+                  description: "Direct public URL to the document file."
+                  example: "https://example.com/invoice.pdf"
+                fileName:
+                  type: string
+                  description: "The name that will appear on the recipient's phone."
+                  example: "Invoice_January.pdf"
+                mimetype:
+                  type: string
+                  description: "Optional. If not provided, the system will detect it automatically based on the file extension."
+                  example: "application/pdf"
+      responses:
+        '200':
+          description: Document sent successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean, example: true }
+                  data: { type: object }
+        '400': { description: "Bad Request - Invalid URL or missing parameters." }
+        '402': { description: "Payment Required - Plan expired." }
+        '403': { description: "Forbidden - Message limit reached." }
+        '404': { description: "Not Found - Instance not found." }
+
+  # --- SEND AUDIO ---
+  /send#audio:
+    post:
+      tags: [Messaging]
+      summary: Send Audio / Voice Note
+      operationId: sendAudio
+      description: |
+        Send an audio file to a contact. By default, this will be sent as a **Voice Note (PTT)** which appears with a waveform and play button in the chat.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [instanceName, number, type, mediaUrl]
+              properties:
+                instanceName:
+                  type: string
+                  description: "Your WhatsApp instance name."
+                  example: "Wachat_Primary"
+                number:
+                  type: string
+                  description: "Recipient phone number (international format)."
+                  example: "628123456789"
+                type:
+                  type: string
+                  enum: [audio]
+                  example: "audio"
+                mediaUrl:
+                  type: string
+                  format: uri
+                  description: "Public URL of the audio file (MP3, OGG, or WAV)."
+                  example: "https://example.com/voice-note.mp3"
+      responses:
+        '200':
+          description: Audio sent successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean, example: true }
+                  data: { type: object }
+        '400': { description: "Bad Request - Invalid URL or parameters." }
+        '402': { description: "Payment Required - Plan expired." }
+        '403': { description: "Forbidden - Monthly limit reached." }
+
+  # --- SEND GROUP MESSAGE ---
+  /send-group:
+    post:
+      tags: [Messaging]
+      summary: Send Group Message
+      operationId: sendGroupMessage
+      description: |
+        Send a plain text message to a WhatsApp group. 
+        You must provide the **Group JID**, which can be retrieved using the `/groups` endpoint.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [instanceName, groupJid, message]
+              properties:
+                instanceName:
+                  type: string
+                  description: "The unique name of your connected instance."
+                  example: "Wachat_Instance"
+                groupJid:
+                  type: string
+                  description: "The unique identifier for the group (ends with @g.us)."
+                  example: "1203630485729@g.us"
+                message:
+                  type: string
+                  description: "The content of the message you want to send."
+                  example: "Hello everyone! This is an automated message from Wachat."
+      responses:
+        '200':
+          description: Message sent to group successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean, example: true }
+        '401':
+          description: "Unauthorized - API Token is missing or invalid."
+        '403':
+          description: "Forbidden - Message limit/quota reached for your plan."
+        '404':
+          description: "Not Found - Instance not found or Group JID is invalid."
+        '500':
+          description: "Internal Server Error."
+
+  # --- SEND LOCATION ---
+  /send-location:
+    post:
+      tags: [Messaging]
+      summary: Send Location
+      operationId: sendLocation
+      description: |
+        Send a static location map to a WhatsApp contact or group. 
+        The recipient will see a map preview with an optional name and address.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [instanceName, number, latitude, longitude]
+              properties:
+                instanceName:
+                  type: string
+                  description: "The name of your WhatsApp instance."
+                  example: "Main_Instance"
+                number:
+                  type: string
+                  description: "Recipient phone number or Group JID."
+                  example: "628123456789"
+                latitude:
+                  type: number
+                  description: "Latitude coordinate."
+                  example: -6.2000
+                longitude:
+                  type: number
+                  description: "Longitude coordinate."
+                  example: 106.8166
+                name:
+                  type: string
+                  description: "Name of the place/location (Title)."
+                  example: "Wachat HQ"
+                address:
+                  type: string
+                  description: "Detailed address string."
+                  example: "Jl. Sudirman No. 1, Jakarta"
+      responses:
+        '200':
+          description: Location sent successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean, example: true }
+                  data: { type: object }
+        '400':
+          description: "Bad Request - Validation failed."
+        '401':
+          description: "Unauthorized - API Token is invalid."
+        '402':
+          description: "Payment Required - Your plan has expired."
+        '403':
+          description: "Forbidden - Message limit has been reached."
+        '404':
+          description: "Not Found - Instance not found."
+
+  # --- SEND POLL ---
+  /send-poll:
+    post:
+      tags: [Messaging]
+      summary: Send Interactive Poll
+      operationId: sendPoll
+      description: |
+        Create and send a native WhatsApp poll. Polls are interactive and allow users to vote directly within the chat. 
+        Works for both individual contacts and group chats.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [instanceName, number, pollName, options, selectableCount]
+              properties:
+                instanceName:
+                  type: string
+                  description: "The name of your connected WhatsApp instance."
+                  example: "Main_Instance"
+                number:
+                  type: string
+                  description: "Recipient phone number (e.g., 62812...) or Group JID (e.g., 12345@g.us)."
+                  example: "628123456789"
+                pollName:
+                  type: string
+                  description: "The question or title of the poll."
+                  example: "What time should we meet tomorrow?"
+                options:
+                  type: array
+                  description: "Array of strings representing the voting options (min: 2)."
+                  items:
+                    type: string
+                  example: ["09:00 AM", "01:00 PM", "04:00 PM"]
+                selectableCount:
+                  type: integer
+                  description: "How many options a single user is allowed to select. Use `1` for single choice."
+                  example: 1
+      responses:
+        '200':
+          description: Poll sent successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean, example: true }
+                  data: 
+                    type: object
+                    description: "Raw response object from the messaging engine."
+        '400': { description: "Validation Error - Check if you have at least 2 options." }
+        '401': { description: "Unauthorized - Invalid API Token." }
+        '404': { description: "Not Found - Instance not found." }
+        '500': { description: "Server Error - Check response details for internal logs." }
+
+  # --- GROUPS (GET) ---
+  /groups:
+    get:
+      tags: [Groups]
+      summary: Fetch All Groups
+      operationId: getGroups
+      description: |
+        Retrieve a detailed list of all WhatsApp groups where the specified instance is a member. 
+        Use the `id` from the response to send messages to specific groups via the `/send-group` endpoint.
+      parameters:
+        - name: instanceName
+          in: query
+          required: true
+          description: The unique name of the instance to fetch groups from.
+          schema:
+            type: string
+          example: "Wachat_Official"
+      responses:
+        '200':
+          description: Successful retrieval of groups.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean, example: true }
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id: { type: string, example: "1234567890@g.us" }
+                        subject: { type: string, example: "Wachat Discussion Group" }
+                        owner: { type: string, example: "62812345678@s.whatsapp.net" }
+                        creation: { type: integer, example: 1672531200 }
+        '400': { description: "Bad Request - instanceName is required." }
+        '401': { description: "Unauthorized - Invalid API Token." }
+        '404': { description: "Not Found - Instance does not exist." }
+
+  # --- INSTANCE: STATE ---
+  /instance/state:
+    get:
+      tags: [Instance]
+      summary: Get Connection State
+      operationId: getInstanceState
+      description: Returns the current connection status of your WhatsApp instance.
+      parameters:
+        - name: instanceName
+          in: query
+          required: true
+          schema: 
+            type: string
+          example: "Wachat"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance: { type: object }
+                  instanceName: { type: string, example: "Wachat" }
+                  state: { type: string, example: "open" }
+        '401':
+          description: Unauthorized - API Token missing or invalid
+
+  # --- INSTANCE: QR ---
+  /instance/qr:
+    get:
+      tags: [Instance]
+      summary: Get Connection / QR Code
+      operationId: getInstanceQR
+      description: |
+        Fetch the connection status or a Base64 QR code. 
+        If the instance is not connected, it returns a `base64` string.
+      parameters:
+        - name: instanceName
+          in: query
+          required: true
+          schema: 
+            type: string
+          example: "Wachat"
+      responses:
+        '200':
+          description: Successful response with QR or Connection data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  base64: { type: string, example: "iVBORw0KGgoAAAANSUhEUgA..." }
+                  instance: 
+                    type: object
+                    properties:
+                      instanceName: { type: string }
+                      status: { type: string }
+        '401': { description: "Unauthorized - Invalid API Token" }
+        '404': { description: "Instance Not Found" }
+
+  # --- INSTANCE: LOGOUT ---
+  /instance/logout:
+    delete:
+      tags: [Instance]
+      summary: Logout Instance
+      operationId: logoutInstance
+      description: |
+        Permanently disconnect the WhatsApp instance from Wachat and clear the current session.
+      parameters:
+        - name: instanceName
+          in: query
+          required: true
+          schema: 
+            type: string
+          example: "Wachat"
+      responses:
+        '200':
+          description: Successfully logged out.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean, example: true }
+        '401': { description: "Unauthorized" }
+        '404': { description: "Instance not found" }
+
+  # --- UTILITIES ---
+  /check-number:
+    get:
+      tags: [Utilities]
+      summary: Validate WhatsApp Number
+      operationId: checkNumber
+      description: |
+        Check if a specific phone number is registered on WhatsApp.
+      parameters:
+        - name: instanceName
+          in: query
+          required: true
+          schema: { type: string }
+          example: "Wachat"
+        - name: number
+          in: query
+          required: true
+          schema: { type: string }
+          example: "62811801813"
+        - name: token
+          in: query
+          required: false
+          description: "Optional: Pass your API key here if not using Authorization header"
+          schema: { type: string }
+      responses:
+        '200':
+          description: "Number checked successfully"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string, example: "success" }
+                  data:
+                    type: object
+                    properties:
+                      exists: { type: boolean, example: true }
+                      jid: { type: string, example: "62811801813@s.whatsapp.net" }
+                      number: { type: string, example: "62811801813" }
+                      instance: { type: string, example: "Wachat" }
+        '400': { description: "Bad Request" }
+        '403': { description: "Forbidden" }
+        '429': { description: "Too Many Requests" }
