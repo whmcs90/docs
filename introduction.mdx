@@ -4,7 +4,9 @@ description: 'Learn how to authenticate and start building with the Wachat API'
 ---
 
 Welcome to the Wachat API! Our REST API allows you to programmatically send messages, manage your WhatsApp instances, and integrate Wachat directly into your own applications.
-
+<CodeGroup>
+Authorization: Bearer YOUR_SECRET_TOKEN
+</CodeGroup>
 ## Base URL
 
 All API requests should be made to the following base URL:
@@ -12,14 +14,5 @@ All API requests should be made to the following base URL:
 ```bash
 https://app.wachat.net/api/v1
 ```
-### Authentication
 
-The Wachat API uses API keys to authenticate requests. You can view and manage your API keys in your Wachat dashboard.
 
-Authentication to the API is performed via HTTP Bearer Auth. Provide your API key as the bearer token in the Authorization header of your request.
-<CodeGroup>
-Authorization: Bearer YOUR_SECRET_TOKEN
-</CodeGroup>
-<Note>
-Keep your API keys secure! Do not share them in publicly accessible areas such as GitHub, client-side code, or public forums. If your key is compromised, regenerate it immediately from your dashboard.
-</Note>
