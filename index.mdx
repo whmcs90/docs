@@ -5,7 +5,16 @@ mode: 'wide'
 ---
 
 Welcome to the official Wachat developer documentation. Whether you are building an automated customer support bot, sending notifications, or managing group chats, our API provides the tools you need to build powerful communication flows.
+## 🔐 Authentication
 
+All API requests to Wachat must be authenticated using a secret token. This token identifies your team and ensures your requests are linked to your specific subscription plan and instances.
+
+### API Token
+To interact with our endpoints, you must include your API Token in the HTTP header of every request.
+<CodeGroup>
+```bash Request Header
+Authorization: Bearer YOUR_SECRET_TOKEN
+</CodeGroup>
 ## Getting Started
 
 Explore our guides and API reference to start sending messages in minutes.
