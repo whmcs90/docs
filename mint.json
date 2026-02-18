@@ -1,10 +1,10 @@
 {
   "name": "Wachat",
   "logo": {
-    "light": "/images/logo-light.svg",
-    "dark": "/images/logo-dark.svg"
+    "light": "/logo/light.png",
+    "dark": "/logo/dark.png"
   },
-  "favicon": "/images/favicon.png",
+  "favicon": "/logo/favicon.png",
   "colors": {
     "primary": "#25D366",
     "light": "#4ade80",
