@@ -1,0 +1,54 @@
+{
+  "name": "Wachat API",
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
+  },
+  "favicon": "/favicon.png",
+  "colors": {
+    "primary": "#0D9488",
+    "light": "#2DD4BF",
+    "dark": "#0F766E"
+  },
+  "topbarLinks": [
+    {
+      "name": "Support",
+      "url": "https://www.wachat.net/contact"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Get Started",
+      "pages": [
+        "introduction"
+      ]
+    },
+    {
+      "group": "Messaging API",
+      "pages": [
+        "api-reference/sendtext",
+        "api-reference/sendmedia",
+        "api-reference/senddocument",
+        "api-reference/sendaudio",
+        "api-reference/sendgroupmessage",
+        "api-reference/sendlocation",
+        "api-reference/sendpoll"
+      ]
+    },
+    {
+      "group": "Instance Management",
+      "pages": [
+        "api-reference/getinstancestate",
+        "api-reference/getinstanceqr",
+        "api-reference/logoutinstance"
+      ]
+    },
+    {
+      "group": "Groups & Utilities",
+      "pages": [
+        "api-reference/getgroups",
+        "api-reference/checknumber"
+      ]
+    }
+  ]
+}
