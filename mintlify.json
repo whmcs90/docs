@@ -22,33 +22,6 @@
       "pages": [
         "introduction"
       ]
-    },
-    {
-      "group": "Messaging API",
-      "pages": [
-        "api-reference/sendtext",
-        "api-reference/sendmedia",
-        "api-reference/senddocument",
-        "api-reference/sendaudio",
-        "api-reference/sendgroupmessage",
-        "api-reference/sendlocation",
-        "api-reference/sendpoll"
-      ]
-    },
-    {
-      "group": "Instance Management",
-      "pages": [
-        "api-reference/getinstancestate",
-        "api-reference/getinstanceqr",
-        "api-reference/logoutinstance"
-      ]
-    },
-    {
-      "group": "Groups & Utilities",
-      "pages": [
-        "api-reference/getgroups",
-        "api-reference/checknumber"
-      ]
     }
   ]
 }
