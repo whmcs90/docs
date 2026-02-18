@@ -1,0 +1,19 @@
+{
+  "api": {
+    "baseUrl": "https://app.wachat.net/api/v1",
+    "auth": {
+      "method": "bearer"
+    }
+  },
+  "navigation": [
+    {
+      "group": "API Reference",
+      "pages": [
+        {
+          "group": "Endpoints",
+          "openapi": "openapi.yaml"
+        }
+      ]
+    }
+  ]
+}
