@@ -21,16 +21,12 @@
       "method": "bearer"
     }
   },
+  "openapi": "openapi.yaml",
   "navigation": [
     {
       "group": "API Reference",
       "pages": [
-        "api-reference/introduction",
-        {
-          "group": "Endpoints",
-          "openapi": "openapi.yaml",
-          "pages": []
-        }
+        "api-reference/introduction"
       ]
     }
   ]
