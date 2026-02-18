@@ -22,12 +22,6 @@
       "pages": [
         "introduction"
       ]
-    },
-    {
-      "group": "API Reference",
-      "pages": [
-        "api-reference"
-      ]
     }
   ]
 }
