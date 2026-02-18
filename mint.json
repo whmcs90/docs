@@ -2,7 +2,7 @@
   "name": "Wachat",
   "logo": {
     "light": "/logo/light.png",
-    "dark": "/logo/dark.png"
+    "dark": "/logo/light.png"
   },
   "favicon": "/logo/favicon.png",
   "colors": {
