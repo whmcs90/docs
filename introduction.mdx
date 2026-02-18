@@ -1,6 +1,7 @@
 ---
 title: "Introduction"
 description: "Everything you need to know to start integrating with Wachat"
+openapi: "post /send#text"
 ---
 
 <img
@@ -16,14 +17,14 @@ description: "Everything you need to know to start integrating with Wachat"
 
 ## Welcome to Wachat API Documentation 📘
 
-The **Wachat API** is a high-level messaging solution designed to help you integrate WhatsApp capabilities into your business workflow seamlessly. Built as a robust wrapper over the Evolution API, it simplifies instance management, messaging, and group controls.
+The **Wachat API** is a high-level messaging solution designed to help you integrate WhatsApp capabilities into your business workflow.
 
 <CardGroup cols={2}>
   <Card title="Quick Integration" icon="bolt" href="#authentication">
     Get your API token and make your first request in minutes.
   </Card>
   <Card title="Interactive Playground" icon="play" href="/api-reference/sendtext">
-    Test our endpoints directly from the browser using the "Try It" feature.
+    Test our endpoints directly from the browser.
   </Card>
 </CardGroup>
 
@@ -31,51 +32,31 @@ The **Wachat API** is a high-level messaging solution designed to help you integ
 
 ## 🔐 Authentication
 
-All API requests to Wachat must be authenticated using a secret token. This token identifies your team and ensures your requests are linked to your specific subscription plan and instances.
-
-### 🛡️ API Token
-
-To identify your requests, you must include your API Token in the **HTTP Header** of every request.
-
 | Header Name | Header Value |
 | :--- | :--- |
 | `x-api-token` | `YOUR_SECRET_TOKEN` |
 
 <Warning>
-  **Keep your token secret!** Your API Token carries full access to your WhatsApp instances and messaging quota. Never share it in public repositories (like GitHub) or client-side code that can be inspected by users.
+  **Keep your token secret!** Never share it in public repositories.
 </Warning>
 
 ### 📍 How to find your API Token
-
-1. Login to your [Wachat Dashboard](https://app.wachat.net).
-2. Navigate to the **Settings** or **API Management** section.
-3. Click on **Copy** or **Generate New Token**.
-4. Use this token in the header of your requests.
+1. Login to [Wachat Dashboard](https://app.wachat.net).
+2. Go to **Settings**.
+3. Copy your **API Token**.
 
 ---
 
 ## 💡 Pro Tip: Testing from this Docs
-
 <Tip>
-  You can use the **"Try It"** feature on the right side of any API endpoint in this documentation!
-
-  Simply paste your `x-api-token` into the authentication field once, and it will be remembered as you navigate through different endpoints. This allows you to verify your instance state or send test messages without writing a single line of code.
+  You can use the **"Try It"** feature on the right side of any API endpoint! Just paste your token once, and it will be remembered.
 </Tip>
 
 ---
 
 ## 🚀 Next Steps
-
-Ready to start messaging? Explore our core features:
-
 <CardGroup cols={3}>
-  <Card title="Send Text" icon="message" href="/api-reference/sendtext">
-    Send standard WhatsApp messages.
-  </Card>
-  <Card title="Media & Files" icon="file-arrow-up" href="/api-reference/sendmedia">
-    Upload images, videos, and documents.
-  </Card>
-  <Card title="Polls" icon="square-poll-vertical" href="/api-reference/sendpoll">
-    Create interactive WhatsApp polls.
-  </Card>
+  <Card title="Send Text" icon="message" href="/api-reference/sendtext" />
+  <Card title="Media & Files" icon="file-arrow-up" href="/api-reference/sendmedia" />
+  <Card title="Polls" icon="square-poll-vertical" href="/api-reference/sendpoll" />
 </CardGroup>
