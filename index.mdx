@@ -11,10 +11,14 @@ All API requests to Wachat must be authenticated using a secret token. This toke
 
 ### API Token
 To interact with our endpoints, you must include your API Token in the HTTP header of every request.
-<CodeGroup>
-```bash Request Header
-Authorization: Bearer YOUR_SECRET_TOKEN
-</CodeGroup>
+<Warning>
+Keep your token secret! Your API Token carries full access to your WhatsApp instances and messaging quota. Never share it in public repositories (like GitHub) or client-side code that can be inspected by users.
+</Warning>
+<Tip>
+💡 Pro Tip: Testing from these Docs
+
+You can use the "Try It" feature on the right side of any API endpoint in this documentation! Simply paste your token into the authentication field once, and it will be remembered as you navigate through different endpoints.
+</Tip>
 ## Getting Started
 
 Explore our guides and API reference to start sending messages in minutes.
