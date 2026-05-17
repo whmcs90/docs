@@ -48,7 +48,12 @@
     {
       "group": "Messages",
       "pages": [
-        "api-reference/send",
+        "api-reference/send-text",
+        "api-reference/send-media",
+        "api-reference/send-button",
+        "api-reference/send-carousel",
+        "api-reference/send-cta",
+        "api-reference/send-list",
         "api-reference/send-group",
         "api-reference/send-location",
         "api-reference/send-poll"
