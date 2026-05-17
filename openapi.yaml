@@ -60,7 +60,7 @@ paths:
                         type: string
                         description: The session instance handling this lookup.
 
-  /send/text:
+  /send:
     post:
       summary: Dispatch Conversational Text Message
       description: Transmit standard text payloads with support for markdown layout formats and organic, human-mimicking typing delays to guarantee high delivery retention.
@@ -103,7 +103,7 @@ paths:
         '200':
           description: Conversational text message successfully processed and queued for dispatch.
 
-  /send/media:
+  /send:
     post:
       summary: Dispatch Rich Media Attachments
       description: Stream high-fidelity rich media assets including documents, audio files, images, and marketing videos directly to recipients along with automated typing simulation workflows.
@@ -156,7 +156,7 @@ paths:
         '200':
           description: Media payload processed and dispatched through the cloud instance infrastructure.
 
-  /send/carousel:
+  /send:
     post:
       summary: Dispatch Interactive Carousel UI Component
       description: Launch highly interactive, side-scrolling horizontal promotional card arrays equipped with contextual call-to-action buttons for maximized digital conversions.
@@ -231,7 +231,7 @@ paths:
         '200':
           description: Complex sliding carousel matrix successfully structured and delivered to user interface.
 
-  /send/button:
+  /send:
     post:
       summary: Dispatch Quick Reply Buttons
       description: Streamline quick micro-actions and conversational branches by transmitting clean interactive prompt cards carrying up to three actionable tap-to-reply button components.
@@ -307,7 +307,7 @@ paths:
         '200':
           description: Quick reply components rendered and transmitted successfully.
 
-  /send/cta:
+  /send:
     post:
       summary: Dispatch Call to Action (CTA) Formats
       description: Direct transaction pipelines effectively by serving contextual messages that contain automated triggers to launch outbound hyperlinks or click-to-dial customer support lines.
@@ -381,7 +381,7 @@ paths:
         '200':
           description: Call-to-Action transactional button modules successfully deployed.
 
-  /send/list:
+  /send:
     post:
       summary: Dispatch Multi-Row List Selection Menu
       description: Package granular menus, service catalogs, or support pathways beautifully inside a compact single-toggle floating drawer element that opens structured choices on user interaction.
