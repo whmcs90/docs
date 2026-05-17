@@ -1,11 +1,13 @@
 openapi: 3.0.3
+
 info:
   title: Wachat Enterprise API
   description: |
-    Welcome to the official Wachat API reference. Wachat provides developer-friendly, ultra-reliable infrastructure to scale your WhatsApp communications programmatically. 
+    Welcome to the official Wachat API reference. Wachat provides developer-friendly, ultra-reliable infrastructure to scale your WhatsApp communications programmatically.
 
     Easily deploy automated messaging pipelines, orchestrate interactive customer engagement patterns, verify phone numbers instantly, and control containerized WhatsApp instances via a secure, production-grade REST architecture.
   version: 1.0.0
+
 servers:
   - url: https://app.wachat.net/api/v1
     description: Live Production Gateway
@@ -14,12 +16,14 @@ security:
   - bearerAuth: []
 
 paths:
+
   /check-number:
     get:
       summary: Verify WhatsApp Contact Registration
       description: Perform an instant validation check on a destination phone number to determine if it is actively registered on the WhatsApp network before executing your messaging payloads.
       tags:
         - Network Validation
+
       parameters:
         - in: query
           name: instanceName
@@ -27,12 +31,14 @@ paths:
           schema:
             type: string
           description: The unique identifier string assigned to your active session instance.
+
         - in: query
           name: number
           required: true
           schema:
             type: string
           description: The recipient's phone number formatted with the international country code (e.g., 628123456789).
+
       responses:
         '200':
           description: Verification lookup completed successfully.
@@ -44,170 +50,213 @@ paths:
                   status:
                     type: string
                     example: success
+
                   data:
                     type: object
                     properties:
                       exists:
                         type: boolean
-                        description: Indication of whether the target target is registered on WhatsApp.
+                        description: Indication of whether the target is registered on WhatsApp.
+
                       jid:
                         type: string
                         description: The unique WhatsApp Jabber ID (JID) assigned to the contact.
+
                       number:
                         type: string
                         description: The verified canonical phone number.
+
                       instance:
                         type: string
                         description: The session instance handling this lookup.
 
-  /send:
+  /send/text:
     post:
       summary: Dispatch Conversational Text Message
       description: Transmit standard text payloads with support for markdown layout formats and organic, human-mimicking typing delays to guarantee high delivery retention.
       tags:
         - Core Messaging Engine
+
       requestBody:
         required: true
         content:
           application/json:
             schema:
               type: object
+
               required:
                 - instanceName
                 - number
                 - type
                 - message
+
               properties:
                 instanceName:
                   type: string
                   description: The specific active connection token identifying your WhatsApp instance.
                   example: "my-instance-01"
+
                 number:
                   type: string
                   description: Target phone number with international country code routing.
                   example: "628123456789"
+
                 type:
                   type: string
-                  enum: [text]
+                  enum:
+                    - text
                   description: Explicit message category specifier. Must be set strictly to `text`.
                   example: "text"
+
                 message:
                   type: string
                   description: Textual content body supporting emojis and system message parameters.
                   example: "Halo, terima kasih telah menghubungi kami!"
+
                 delay:
                   type: integer
                   description: Simulated human typing duration configured in milliseconds. If omitted, the engine automatically defaults to a natural 3000ms to 5000ms randomized interval.
                   example: 3000
+
       responses:
         '200':
           description: Conversational text message successfully processed and queued for dispatch.
 
-  /send:
+  /send/media:
     post:
       summary: Dispatch Rich Media Attachments
       description: Stream high-fidelity rich media assets including documents, audio files, images, and marketing videos directly to recipients along with automated typing simulation workflows.
       tags:
         - Core Messaging Engine
+
       requestBody:
         required: true
         content:
           application/json:
             schema:
               type: object
+
               required:
                 - instanceName
                 - number
                 - type
                 - mediaUrl
+
               properties:
                 instanceName:
                   type: string
                   description: Name of your connected WhatsApp session profile.
+
                 number:
                   type: string
                   description: Target phone number with international country code routing.
+
                 type:
                   type: string
-                  enum: [image, video, document, audio]
+                  enum:
+                    - image
+                    - video
+                    - document
+                    - audio
                   description: Supported structural file classification standard.
                   example: "image"
+
                 mediaUrl:
                   type: string
                   format: uri
                   description: The direct fully qualified URL endpoint hosting your media asset.
                   example: "https://wachat.net/assets/promo.jpg"
+
                 message:
                   type: string
                   description: Contextual rich text descriptive caption elements accompanied with media assets (ignored for audio payloads).
                   example: "Cek promo menarik bulan ini!"
+
                 fileName:
                   type: string
                   description: Explicit file attachment naming convention overlay. Strongly recommended for structural documents.
                   example: "Invoice-1024.pdf"
+
                 mimetype:
                   type: string
                   description: Explicit custom Multipurpose Internet Mail Extensions header format definition overlay.
                   example: "application/pdf"
+
                 delay:
                   type: integer
                   description: Custom simulated typing delay parameter in milliseconds. If left empty, it runs an organic 3-5 seconds random engine delay.
+
       responses:
         '200':
           description: Media payload processed and dispatched through the cloud instance infrastructure.
 
-  /send:
+  /send/carousel:
     post:
       summary: Dispatch Interactive Carousel UI Component
       description: Launch highly interactive, side-scrolling horizontal promotional card arrays equipped with contextual call-to-action buttons for maximized digital conversions.
       tags:
         - High-Conversion UI Modules
+
       requestBody:
         required: true
         content:
           application/json:
             schema:
               type: object
+
               required:
                 - instanceName
                 - number
                 - type
                 - interactive
+
               properties:
                 instanceName:
                   type: string
                   description: Name of your connected WhatsApp session profile.
+
                 number:
                   type: string
                   description: Target phone number with international country code routing.
+
                 type:
                   type: string
-                  enum: [interactive]
+                  enum:
+                    - interactive
                   description: Set this strictly to `interactive`.
                   example: "interactive"
+
                 delay:
                   type: integer
                   description: Custom time delay configuration before rendering the structural carousel cards.
+
                 interactive:
                   type: object
+
                   required:
                     - type
                     - cards
+
                   properties:
                     type:
                       type: string
-                      enum: [carousel]
+                      enum:
+                        - carousel
                       description: UI component block schema selector context.
                       example: "carousel"
+
                     body:
                       type: string
                       description: Primary introductory copy text context rendered directly above the sliding card frame layout.
                       example: "Berikut adalah katalog layanan web kami:"
+
                     cards:
                       type: array
                       description: Matrix listing specific multi-card content parameters and action response setups.
+
                       items:
                         type: object
+
                       example:
                         - header:
                             type: image
@@ -218,6 +267,7 @@ paths:
                               buttonText:
                                 displayText: Ambil Promo
                               type: 1
+
                         - header:
                             type: image
                             mediaUrl: https://feyebu.com/img/vps.jpg
@@ -227,236 +277,295 @@ paths:
                               buttonText:
                                 displayText: Konsultasi
                               type: 1
+
       responses:
         '200':
           description: Complex sliding carousel matrix successfully structured and delivered to user interface.
 
-  /send:
+  /send/button:
     post:
       summary: Dispatch Quick Reply Buttons
       description: Streamline quick micro-actions and conversational branches by transmitting clean interactive prompt cards carrying up to three actionable tap-to-reply button components.
       tags:
         - High-Conversion UI Modules
+
       requestBody:
         required: true
         content:
           application/json:
             schema:
               type: object
+
               required:
                 - instanceName
                 - number
                 - type
                 - interactive
+
               properties:
                 instanceName:
                   type: string
                   description: The uniquely assigned name specifying your active cloud instance session.
                   example: "my-instance-01"
+
                 number:
                   type: string
                   description: Target recipient international mobile number.
                   example: "628123456789"
+
                 type:
                   type: string
-                  enum: [interactive]
+                  enum:
+                    - interactive
                   description: Explicitly configure message grouping structure to `interactive`.
                   example: "interactive"
+
                 delay:
                   type: integer
                   description: Fine-tune simulated organic system delay response limits in milliseconds.
+
                 interactive:
                   type: object
+
                   required:
                     - type
                     - body
                     - buttons
+
                   properties:
                     type:
                       type: string
-                      enum: [button]
+                      enum:
+                        - button
                       description: UI rendering design selector context.
                       example: "button"
+
                     title:
                       type: string
                       description: Header caption bolded text at the crown position of the interactive card component block.
                       example: "Konfirmasi Kehadiran"
+
                     body:
                       type: string
                       description: Core text containing instructions or questions positioned above the button selections.
                       example: "Apakah Anda akan menghadiri event besok pagi?"
+
                     footer:
                       type: string
                       description: Subtle lower brand anchor text or automated message legal notice values.
                       example: "Flobamora Solusi Digital"
+
                     buttons:
                       type: array
                       description: Array layout config defining your options structure (Strict limit of 3 interactive nodes).
+
                       items:
                         type: object
+
                       example:
                         - buttonId: btn_yes
                           buttonText:
                             displayText: Ya, Saya Datang
                           type: 1
+
                         - buttonId: btn_no
                           buttonText:
                             displayText: Maaf, Berhalangan
                           type: 1
+
       responses:
         '200':
           description: Quick reply components rendered and transmitted successfully.
 
-  /send:
+  /send/cta:
     post:
       summary: Dispatch Call to Action (CTA) Formats
       description: Direct transaction pipelines effectively by serving contextual messages that contain automated triggers to launch outbound hyperlinks or click-to-dial customer support lines.
       tags:
         - High-Conversion UI Modules
+
       requestBody:
         required: true
         content:
           application/json:
             schema:
               type: object
+
               required:
                 - instanceName
                 - number
                 - type
                 - interactive
+
               properties:
                 instanceName:
                   type: string
                   description: Target instance configuration identity path label.
+
                 number:
                   type: string
                   description: Target destination phone string with international parameters.
+
                 type:
                   type: string
-                  enum: [interactive]
+                  enum:
+                    - interactive
                   description: Configure core layout envelope to `interactive`.
                   example: "interactive"
+
                 delay:
                   type: integer
                   description: Simulated system typing simulation latency config defined in milliseconds.
+
                 interactive:
                   type: object
+
                   required:
                     - type
                     - body
                     - buttons
+
                   properties:
                     type:
                       type: string
-                      enum: [cta]
+                      enum:
+                        - cta
                       description: Select core UI component structural blueprint layout format.
                       example: "cta"
+
                     title:
                       type: string
                       description: Main title text banner of the CTA block.
                       example: "Layanan Baru Wachat.net"
+
                     body:
                       type: string
                       description: Core explanatory contextual message copy.
                       example: "Kunjungi landing page kami atau hubungi tim sales sekarang."
+
                     footer:
                       type: string
                       description: Subtle brand watermark text layout element at the bottom edge.
                       example: "Powered by Wachat"
+
                     buttons:
                       type: array
                       description: Matrix grouping click-to-call nodes and automated URI external routing references.
+
                       items:
                         type: object
+
                       example:
                         - index: 1
                           urlButton:
                             displayText: Buka Website
                             url: https://feyebu.com
+
                         - index: 2
                           callButton:
                             displayText: Hubungi Kami
                             phoneNumber: "+62812345678"
+
       responses:
         '200':
           description: Call-to-Action transactional button modules successfully deployed.
 
-  /send:
+  /send/list:
     post:
       summary: Dispatch Multi-Row List Selection Menu
       description: Package granular menus, service catalogs, or support pathways beautifully inside a compact single-toggle floating drawer element that opens structured choices on user interaction.
       tags:
         - High-Conversion UI Modules
+
       requestBody:
         required: true
         content:
           application/json:
             schema:
               type: object
+
               required:
                 - instanceName
                 - number
                 - type
                 - interactive
+
               properties:
                 instanceName:
                   type: string
                   description: Connected target session instance system path identity key.
+
                 number:
                   type: string
                   description: Target mobile recipient parameters with structural international context.
+
                 type:
                   type: string
-                  enum: [interactive]
+                  enum:
+                    - interactive
                   description: Configure component container to `interactive`.
                   example: "interactive"
+
                 delay:
                   type: integer
                   description: Custom organic response processing delay settings in milliseconds.
+
                 interactive:
                   type: object
+
                   required:
                     - type
                     - title
                     - text
                     - buttonText
                     - sections
+
                   properties:
                     type:
                       type: string
-                      enum: [list]
+                      enum:
+                        - list
                       description: Establish targeted layout logic context configuration exclusively to `list`.
                       example: "list"
+
                     title:
                       type: string
                       description: Top header structural element designation text string.
                       example: "Pusat Layanan Digital"
+
                     text:
                       type: string
                       description: Primary description body content context mapping.
                       example: "Silakan pilih salah satu sesi konsultasi yang tersedia di bawah ini:"
+
                     footerText:
                       type: string
                       description: Lower margins text label string format setting.
                       example: "Flobamora Solusi Digital"
+
                     buttonText:
                       type: string
                       description: Label text printed on the interactive list toggle component button.
                       example: "Lihat Semua Sesi"
+
                     sections:
                       type: array
                       description: Multi-dimensional object grouping choice rows structurally into categorical segments.
+
                       items:
                         type: object
+
                       example:
                         - title: Pilihan Jadwal
                           rows:
                             - title: Sesi Pagi
                               description: Jam 09:00 - 12:00 WIB
                               rowId: sesi_1
+
                             - title: Sesi Siang
                               description: Jam 13:00 - 16:00 WIB
                               rowId: sesi_2
+
       responses:
         '200':
           description: Multi-tiered structured choice component list menu sent successfully.
@@ -467,26 +576,32 @@ paths:
       description: Broadcast text updates and notification streams directly to a specific community target channel using standard group JID references.
       tags:
         - Mass Channel Orchestration
+
       requestBody:
         required: true
         content:
           application/json:
             schema:
               type: object
+
               required:
                 - instanceName
                 - groupJid
                 - message
+
               properties:
                 instanceName:
                   type: string
                   description: Name of your connected WhatsApp session profile.
+
                 groupJid:
                   type: string
                   description: The absolute group channel Jabber ID string parameter format (e.g., 12036312345678@g.us).
+
                 message:
                   type: string
                   description: The text content of the group message.
+
       responses:
         '200':
           description: Channel message distributed to group members.
@@ -497,36 +612,45 @@ paths:
       description: Push physical business coordinates, pickup points, or dynamic navigation location maps using live geometric markers directly into real-time conversation flows.
       tags:
         - Contextual Utilities
+
       requestBody:
         required: true
         content:
           application/json:
             schema:
               type: object
+
               required:
                 - instanceName
                 - number
                 - latitude
                 - longitude
+
               properties:
                 instanceName:
                   type: string
                   description: Name of your connected WhatsApp session profile.
+
                 number:
                   type: string
                   description: Destination client contact phone data format string.
+
                 latitude:
                   type: number
                   description: The precise mapping geographic Latitude coordinate property.
+
                 longitude:
                   type: number
                   description: The precise mapping geographic Longitude coordinate property.
+
                 name:
                   type: string
                   description: Named location title label (e.g., Head Office / Store Branch).
+
                 address:
                   type: string
                   description: Full alphanumeric street physical address metadata properties.
+
       responses:
         '200':
           description: Location point data successfully parsed and pushed.
@@ -537,36 +661,45 @@ paths:
       description: Engage users and aggregate instantly actionable response feedback data loops by deploying structured real-time interactive choice survey components.
       tags:
         - High-Conversion UI Modules
+
       requestBody:
         required: true
         content:
           application/json:
             schema:
               type: object
+
               required:
                 - instanceName
                 - number
                 - pollName
                 - options
                 - selectableCount
+
               properties:
                 instanceName:
                   type: string
                   description: Name of your connected WhatsApp session profile.
+
                 number:
                   type: string
                   description: Destination channel target phone route parameter.
+
                 pollName:
                   type: string
                   description: The main survey query question or statement text.
+
                 options:
                   type: array
                   description: Collection array mapping multiple choice answer options.
+
                   items:
                     type: string
+
                 selectableCount:
                   type: integer
                   description: Maximum count limit restriction designating total valid selectable check answers allowed per voter profile.
+
       responses:
         '200':
           description: Interactive polling layout distributed successfully.
@@ -577,6 +710,7 @@ paths:
       description: Scrape, retrieve, and map complete structured lists including names, configuration metadata profiles, and unique JIDs of all channels your instance profile resides in.
       tags:
         - Mass Channel Orchestration
+
       parameters:
         - in: query
           name: instanceName
@@ -584,6 +718,7 @@ paths:
           schema:
             type: string
           description: The designated tracking name representing your active connection runtime session.
+
       responses:
         '200':
           description: Collection array containing structural channel groups metadata pulled.
@@ -594,6 +729,7 @@ paths:
       description: Retrieve base64 or stream raw token structures required to authenticate, establish handshake protocols, and link your physical WhatsApp device onto a newly provisioned instance framework.
       tags:
         - Session Lifecycle Infrastructure
+
       parameters:
         - in: query
           name: instanceName
@@ -601,6 +737,7 @@ paths:
           schema:
             type: string
           description: Dedicated system unique identifier naming tracking handle for provisioning execution.
+
       responses:
         '200':
           description: Session linking handshake payload and QR structure prepared.
@@ -611,6 +748,7 @@ paths:
       description: Retrieve granular, real-time diagnostic health statuses to confirm if your container instance pipeline is actively authenticated, sleeping, or disconnected from server fabrics.
       tags:
         - Session Lifecycle Infrastructure
+
       parameters:
         - in: query
           name: instanceName
@@ -618,6 +756,7 @@ paths:
           schema:
             type: string
           description: Assigned target profile registration name parameter.
+
       responses:
         '200':
           description: Diagnostic runtime operational metrics evaluated.
@@ -628,6 +767,7 @@ paths:
       description: Gracefully execute remote instance logout workflows to sever session sockets, clear local instance configurations, and detach mobile nodes securely from your instance framework.
       tags:
         - Session Lifecycle Infrastructure
+
       parameters:
         - in: query
           name: instanceName
@@ -635,6 +775,7 @@ paths:
           schema:
             type: string
           description: Name string tracking handle mapping your connected active instance container profile.
+
       responses:
         '200':
           description: Token storage arrays safely destroyed and instance safely offline.
