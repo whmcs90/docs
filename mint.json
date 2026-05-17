@@ -46,17 +46,43 @@
       ]
     },
     {
-      "group": "Endpoints",
+      "group": "Messages",
       "pages": [
-        "api-reference/check-number",
         "api-reference/send",
+        {
+          "group": "Send Message",
+          "pages": [
+            "api-reference/send-text",
+            "api-reference/send-media",
+            "api-reference/send-button",
+            "api-reference/send-carousel",
+            "api-reference/send-cta",
+            "api-reference/send-list"
+          ]
+        },
         "api-reference/send-group",
         "api-reference/send-location",
-        "api-reference/send-poll",
-        "api-reference/groups",
+        "api-reference/send-poll"
+      ]
+    },
+    {
+      "group": "Groups",
+      "pages": [
+        "api-reference/groups"
+      ]
+    },
+    {
+      "group": "Instances",
+      "pages": [
         "api-reference/instance-qr",
         "api-reference/instance-state",
         "api-reference/instance-logout"
+      ]
+    },
+    {
+      "group": "Numbers",
+      "pages": [
+        "api-reference/check-number"
       ]
     }
   ]
