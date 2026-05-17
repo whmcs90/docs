@@ -45,11 +45,9 @@
         "api-reference/introduction"
       ]
     },
-    {
-      "group": "Messages",
-      "pages": [
-        "api-reference/send",
-        {
+   {
+  "group": "Messages",
+  "pages": [
           "group": "Send Message",
           "pages": [
             "api-reference/send-text",
