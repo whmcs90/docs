@@ -36,7 +36,7 @@ You can use the "Try It" feature on the right side of any API endpoint in this d
   </Card>
   <Card
     title="Send Text Message"
-    icon="message-text"
+    icon="message"
     href="/api-reference/send-text"
   >
     Send simple WhatsApp text messages with optional typing delay simulation.
@@ -50,37 +50,41 @@ You can use the "Try It" feature on the right side of any API endpoint in this d
     Send images, videos, documents, and audio messages with captions.
   </Card>
 
+  {/* ✅ PERBAIKAN REPLAY BUTTON: Menggunakan 'square-plus' atau 'pointer' */}
   <Card
-    title="Send Reply Buttons"
-    icon="square-dashed-mouse-pointer"
+    title="Send Buttons"
+    icon="pointer"
     href="/api-reference/send-button"
   >
     Create interactive quick reply button experiences.
   </Card>
 
+  {/* ✅ PERBAIKAN CTA BUTTONS: Menggunakan 'link' atau 'bolt' (aksi cepat) */}
   <Card
     title="Send CTA Buttons"
-    icon="box-select"
-    href="/api-reference/send-cta"
+    icon="link"
+  	href="/api-reference/send-cta"
   >
     Send actionable URL and call buttons directly inside WhatsApp.
   </Card>
 
   <Card
     title="Send Carousel"
-    icon="columns-3"
+    icon="images"
     href="/api-reference/send-carousel"
   >
     Deliver multi-card carousel interactions with embedded actions.
   </Card>
 
+  {/* ✅ PERBAIKAN LIST MENU: Menggunakan 'list' atau 'bars' murni */}
   <Card
     title="Send List Menu"
-    icon="menu"
+    icon="list"
     href="/api-reference/send-list"
   >
     Build expandable WhatsApp list menu experiences.
   </Card>
+  
   <Card
     title="Manage Instances"
     icon="qrcode"
@@ -88,9 +92,11 @@ You can use the "Try It" feature on the right side of any API endpoint in this d
   >
     Connect devices, check connection status, and generate QR codes.
   </Card>
+  
+  {/* ✅ PERBAIKAN INTERACTIVE MESSAGE (POLLS): Menggunakan 'check-square' atau 'sliders' */}
   <Card
     title="Interactive Messages"
-    icon="vote"
+    icon="check-square"
     href="/api-reference/send-poll"
   >
     Engage your users by sending interactive polls and locations.
