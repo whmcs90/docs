@@ -5,6 +5,7 @@ mode: 'wide'
 ---
 
 Welcome to the official Wachat developer documentation. Whether you are building an automated customer support bot, sending notifications, or managing group chats, our API provides the tools you need to build powerful communication flows.
+
 ## 🔐 Authentication
 
 All API requests to Wachat must be authenticated using a secret token. This token identifies your team and ensures your requests are linked to your specific subscription plan and instances.
@@ -28,68 +29,68 @@ You can use the "Try It" feature on the right side of any API endpoint in this d
 <CardGroup cols={2}>
   <Card
     title="Quick Start Guide"
-    icon="rocket"
+    icon="play"
     href="/api-reference/introduction"
   >
     Learn how to authenticate and make your very first API request.
   </Card>
   <Card
-  title="Send Text Message"
-  icon="message-circle"
-  href="/api-reference/send-text"
->
-  Send simple WhatsApp text messages with optional typing delay simulation.
-</Card>
+    title="Send Text Message"
+    icon="message-text"
+    href="/api-reference/send-text"
+  >
+    Send simple WhatsApp text messages with optional typing delay simulation.
+  </Card>
 
-<Card
-  title="Send Media Message"
-  icon="image"
-  href="/api-reference/send-media"
->
-  Send images, videos, documents, and audio messages with captions.
-</Card>
+  <Card
+    title="Send Media Message"
+    icon="paperclip"
+    href="/api-reference/send-media"
+  >
+    Send images, videos, documents, and audio messages with captions.
+  </Card>
 
-<Card
-  title="Send Reply Buttons"
-  icon="mouse-pointer-click"
-  href="/api-reference/send-button"
->
-  Create interactive quick reply button experiences.
-</Card>
+  <Card
+    title="Send Reply Buttons"
+    icon="square-dashed-mouse-pointer"
+    href="/api-reference/send-button"
+  >
+    Create interactive quick reply button experiences.
+  </Card>
 
-<Card
-  title="Send CTA Buttons"
-  icon="link"
-  href="/api-reference/send-cta"
->
-  Send actionable URL and call buttons directly inside WhatsApp.
-</Card>
+  <Card
+    title="Send CTA Buttons"
+    icon="box-select"
+    href="/api-reference/send-cta"
+  >
+    Send actionable URL and call buttons directly inside WhatsApp.
+  </Card>
 
-<Card
-  title="Send Carousel"
-  icon="gallery-horizontal"
-  href="/api-reference/send-carousel"
->
-  Deliver multi-card carousel interactions with embedded actions.
-</Card>
+  <Card
+    title="Send Carousel"
+    icon="columns-3"
+    href="/api-reference/send-carousel"
+  >
+    Deliver multi-card carousel interactions with embedded actions.
+  </Card>
 
-<Card
-  title="Send List Menu"
-  icon="list"
-  href="/api-reference/send-list"
->
-  Build expandable WhatsApp list menu experiences.
-</Card>
+  <Card
+    title="Send List Menu"
+    icon="menu"
+    href="/api-reference/send-list"
+  >
+    Build expandable WhatsApp list menu experiences.
+  </Card>
   <Card
     title="Manage Instances"
-    icon="server"
+    icon="qrcode"
     href="/api-reference/instance-state"
   >
     Connect devices, check connection status, and generate QR codes.
   </Card>
   <Card
     title="Interactive Messages"
-    icon="list-check"
+    icon="vote"
     href="/api-reference/send-poll"
   >
     Engage your users by sending interactive polls and locations.
@@ -101,14 +102,14 @@ You can use the "Try It" feature on the right side of any API endpoint in this d
 <CardGroup cols={2}>
   <Card
     title="Group Management"
-    icon="users"
+    icon="users-gear"
     href="/api-reference/groups"
   >
     Fetch group lists and send messages directly to WhatsApp groups.
   </Card>
   <Card
     title="Webhooks"
-    icon="webhook"
+    icon="brackets-curly"
     href="/api-reference/introduction#webhooks"
   >
     Receive real-time updates on your server for incoming messages.
