@@ -116,7 +116,7 @@ paths:
                 delay:
                   type: integer
                   description: Simulated human typing duration configured in milliseconds. If omitted, the engine automatically defaults to a natural 3000ms to 5000ms randomized interval.
-                  example: 3000
+                  example: 1000
 
       responses:
         '200':
@@ -165,22 +165,22 @@ paths:
                   type: string
                   format: uri
                   description: The direct fully qualified URL endpoint hosting your media asset.
-                  example: "https://wachat.net/assets/promo.jpg"
+                  example: "https://cdn.pixabay.com/photo/2022/09/23/09/13/promotion-7474039_1280.png"
 
                 message:
                   type: string
                   description: Contextual rich text descriptive caption elements accompanied with media assets (ignored for audio payloads).
-                  example: "Cek promo menarik bulan ini!"
+                  example: "Check out this month's exciting promotions!"
 
                 fileName:
                   type: string
                   description: Explicit file attachment naming convention overlay. Strongly recommended for structural documents.
-                  example: "Invoice-1024.pdf"
+                  example: "promotion-7474039_1280.png"
 
                 mimetype:
                   type: string
                   description: Explicit custom Multipurpose Internet Mail Extensions header format definition overlay.
-                  example: "application/pdf"
+                  example: "image/png"
 
                 delay:
                   type: integer
@@ -248,7 +248,7 @@ paths:
                     body:
                       type: string
                       description: Primary introductory copy text context rendered directly above the sliding card frame layout.
-                      example: "Berikut adalah katalog layanan web kami:"
+                      example: "Here is our web services catalog:"
 
                     cards:
                       type: array
@@ -260,22 +260,22 @@ paths:
                       example:
                         - header:
                             type: image
-                            mediaUrl: https://feyebu.com/img/saas.jpg
+                            mediaUrl: https://cdn.pixabay.com/photo/2022/09/23/09/13/promotion-7474039_1280.png
                           body: Paket Kilat Pembuatan SaaS Modern
                           buttons:
                             - buttonId: c_saas
                               buttonText:
-                                displayText: Ambil Promo
+                                displayText: Take Promotion
                               type: 1
 
                         - header:
                             type: image
-                            mediaUrl: https://feyebu.com/img/vps.jpg
+                            mediaUrl: https://cdn.pixabay.com/photo/2022/07/21/13/18/computer-7336233_1280.png
                           body: Setup VPS DevOps & CloudPanel
                           buttons:
                             - buttonId: c_vps
                               buttonText:
-                                displayText: Konsultasi
+                                displayText: Consultation
                               type: 1
 
       responses:
@@ -343,17 +343,17 @@ paths:
                     title:
                       type: string
                       description: Header caption bolded text at the crown position of the interactive card component block.
-                      example: "Konfirmasi Kehadiran"
+                      example: "Confirm Attendance"
 
                     body:
                       type: string
                       description: Core text containing instructions or questions positioned above the button selections.
-                      example: "Apakah Anda akan menghadiri event besok pagi?"
+                      example: "Will you be attending the event tomorrow morning?"
 
                     footer:
                       type: string
                       description: Subtle lower brand anchor text or automated message legal notice values.
-                      example: "Flobamora Solusi Digital"
+                      example: "Wachat"
 
                     buttons:
                       type: array
@@ -365,12 +365,12 @@ paths:
                       example:
                         - buttonId: btn_yes
                           buttonText:
-                            displayText: Ya, Saya Datang
+                            displayText: Yes, I'm Coming
                           type: 1
 
                         - buttonId: btn_no
                           buttonText:
-                            displayText: Maaf, Berhalangan
+                            displayText: Sorry, Unable to attend
                           type: 1
 
       responses:
@@ -436,12 +436,12 @@ paths:
                     title:
                       type: string
                       description: Main title text banner of the CTA block.
-                      example: "Layanan Baru Wachat.net"
+                      example: "New Wachat.net Service"
 
                     body:
                       type: string
                       description: Core explanatory contextual message copy.
-                      example: "Kunjungi landing page kami atau hubungi tim sales sekarang."
+                      example: "Visit our landing page or contact our sales team now."
 
                     footer:
                       type: string
@@ -458,12 +458,12 @@ paths:
                       example:
                         - index: 1
                           urlButton:
-                            displayText: Buka Website
-                            url: https://feyebu.com
+                            displayText: Visit
+                            url: https://www.wachat.net
 
                         - index: 2
                           callButton:
-                            displayText: Hubungi Kami
+                            displayText: Contact us
                             phoneNumber: "+62812345678"
 
       responses:
@@ -531,12 +531,12 @@ paths:
                     title:
                       type: string
                       description: Top header structural element designation text string.
-                      example: "Pusat Layanan Digital"
+                      example: "Digital Service Center"
 
                     text:
                       type: string
                       description: Primary description body content context mapping.
-                      example: "Silakan pilih salah satu sesi konsultasi yang tersedia di bawah ini:"
+                      example: "Please select one of the available consultation sessions below:"
 
                     footerText:
                       type: string
@@ -546,7 +546,7 @@ paths:
                     buttonText:
                       type: string
                       description: Label text printed on the interactive list toggle component button.
-                      example: "Lihat Semua Sesi"
+                      example: "View All Sessions"
 
                     sections:
                       type: array
@@ -556,14 +556,14 @@ paths:
                         type: object
 
                       example:
-                        - title: Pilihan Jadwal
+                        - title: Schedule Options
                           rows:
-                            - title: Sesi Pagi
-                              description: Jam 09:00 - 12:00 WIB
+                            - title: Morning Session
+                              description: 09:00 - 12:00 PM
                               rowId: sesi_1
 
                             - title: Sesi Siang
-                              description: Jam 13:00 - 16:00 WIB
+                              description: 13:00 - 16:00 AM
                               rowId: sesi_2
 
       responses:
