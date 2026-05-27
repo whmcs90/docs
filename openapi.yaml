@@ -144,7 +144,7 @@ paths:
                 "message": "Check out this month's exciting promotions!",
                 "fileName": "promotion-7474039_1280.png",
                 "mimetype": "image/png",
-                "delay": 123
+                "delay": 1000
               }'
       requestBody:
         required: true
@@ -305,7 +305,42 @@ paths:
       description: Streamline quick micro-actions and conversational branches by transmitting clean interactive prompt cards carrying up to three actionable tap-to-reply button components.
       tags:
         - High-Conversion UI Modules
-
+      x-codeSamples:
+        - lang: bash
+          label: cURL
+          source: |
+            curl --request POST \
+              --url https://app.wachat.net/api/v1/send/button \
+              --header "Authorization: Bearer <token>" \
+              --header "Content-Type: application/json" \
+              --data-raw '{
+                "instanceName": "my-instance-01",
+                "number": "628123456789",
+                "type": "interactive",
+                "interactive": {
+                  "type": "button",
+                  "body": "Will you be attending the event tomorrow morning?",
+                  "buttons": [
+                    {
+                      "buttonId": "btn_yes",
+                      "buttonText": {
+                        "displayText": "Yes, I am Coming"
+                      },
+                      "type": 1
+                    },
+                    {
+                      "buttonId": "btn_no",
+                      "buttonText": {
+                        "displayText": "Sorry, Unable to attend"
+                      },
+                      "type": 1
+                    }
+                  ],
+                  "title": "Confirm Attendance",
+                  "footer": "Wachat"
+                },
+                "delay": 1000
+              }'
       requestBody:
         required: true
         content:
