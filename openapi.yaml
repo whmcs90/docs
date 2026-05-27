@@ -275,7 +275,7 @@ paths:
                             - buttonId: c_vps
                               buttonText:
                                 displayText: Consultation
-                              type: 1
+                              type: 2
 
       responses:
         '200':
@@ -379,7 +379,7 @@ paths:
                               displayText:
                                 type: string
                                 description: Visible label displayed on the button.
-                                example: "Yes, I'm Coming"
+                                example: "Yes, I m Coming"
 
                           type:
                             type: integer
@@ -403,8 +403,8 @@ paths:
                     - buttonId: "btn_no"
                       buttonText:
                         displayText: "Sorry, Unable to attend"
-                      type: 1
-                delay: 123
+                      type: 2
+                delay: 1000
 
       responses:
         '200':
