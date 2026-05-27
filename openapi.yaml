@@ -270,7 +270,7 @@ paths:
                         - header:
                             type: image
                             mediaUrl: https://cdn.pixabay.com/photo/2022/07/21/13/18/computer-7336233_1280.png
-                          body: Setup VPS DevOps & CloudPanel
+                          body: Setup VPS & CloudPanel
                           buttons:
                             - buttonId: c_vps
                               buttonText:
