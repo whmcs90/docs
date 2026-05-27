@@ -128,7 +128,24 @@ paths:
       description: Stream high-fidelity rich media assets including documents, audio files, images, and marketing videos directly to recipients along with automated typing simulation workflows.
       tags:
         - Core Messaging Engine
-
+      x-codeSamples:
+        - lang: bash
+          label: cURL
+          source: |
+            curl --request POST \
+              --url https://app.wachat.net/api/v1/send/media \
+              --header "Authorization: Bearer <token>" \
+              --header "Content-Type: application/json" \
+              --data-raw '{
+                "instanceName": "my-instance-01",
+                "number": "628123456789",
+                "type": "image",
+                "mediaUrl": "https://cdn.pixabay.com/photo/2022/09/23/09/13/promotion-7474039_1280.png",
+                "message": "Check out this month's exciting promotions!",
+                "fileName": "promotion-7474039_1280.png",
+                "mimetype": "image/png",
+                "delay": 123
+              }'
       requestBody:
         required: true
         content:
