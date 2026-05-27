@@ -29,6 +29,9 @@
     "baseUrl": "https://app.wachat.net/api/v1",
     "auth": {
       "method": "bearer"
+    },
+  "playground": {
+      "display": "interactive"
     }
   },
   "openapi": "openapi.yaml",
