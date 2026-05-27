@@ -306,56 +306,17 @@ paths:
       tags:
         - High-Conversion UI Modules
 
-      x-codeSamples:
-        - lang: bash
-          label: cURL
-          source: |
-            curl --request POST \
-              --url https://app.wachat.net/api/v1/send/button \
-              --header "Authorization: Bearer <token>" \
-              --header "Content-Type: application/json" \
-              --data-raw '{
-                "instanceName": "my-instance-01",
-                "number": "628123456789",
-                "type": "interactive",
-                "interactive": {
-                  "type": "button",
-                  "title": "Confirm Attendance",
-                  "body": "Will you be attending the event tomorrow morning?",
-                  "footer": "Wachat",
-                  "buttons": [
-                    {
-                      "buttonId": "btn_yes",
-                      "buttonText": {
-                        "displayText": "Yes, I'\''m Coming"
-                      },
-                      "type": 1
-                    },
-                    {
-                      "buttonId": "btn_no",
-                      "buttonText": {
-                        "displayText": "Sorry, Unable to attend"
-                      },
-                      "type": 1
-                    }
-                  ]
-                },
-                "delay": 123
-              }'
-
       requestBody:
         required: true
         content:
           application/json:
             schema:
               type: object
-
               required:
                 - instanceName
                 - number
                 - type
                 - interactive
-
               properties:
                 instanceName:
                   type: string
@@ -374,18 +335,12 @@ paths:
                   description: Explicitly configure message grouping structure to `interactive`.
                   example: "interactive"
 
-                delay:
-                  type: integer
-                  description: Fine-tune simulated organic system delay response limits in milliseconds.
-                  example: 123
-
                 interactive:
                   type: object
                   required:
                     - type
                     - body
                     - buttons
-
                   properties:
                     type:
                       type: string
@@ -441,16 +396,10 @@ paths:
                             description: Button type identifier.
                             example: 1
 
-                      example:
-                        - buttonId: btn_yes
-                          buttonText:
-                            displayText: "Yes, I'm Coming"
-                          type: 1
-
-                        - buttonId: btn_no
-                          buttonText:
-                            displayText: "Sorry, Unable to attend"
-                          type: 1
+                delay:
+                  type: integer
+                  description: Fine-tune simulated organic system delay response limits in milliseconds.
+                  example: 123
 
             example:
               instanceName: "my-instance-01"
@@ -475,7 +424,7 @@ paths:
       responses:
         '200':
           description: Quick reply components rendered and transmitted successfully.
-
+  
   /send/cta:
     post:
       summary: Dispatch Call to Action (CTA) Formats
