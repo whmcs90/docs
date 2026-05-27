@@ -169,7 +169,7 @@ paths:
                 message:
                   type: string
                   description: Contextual rich text descriptive caption elements accompanied with media assets (ignored for audio payloads).
-                  example: "Check out this month's exciting promotions!"
+                  example: "Check out this month exciting promotions!"
 
                 fileName:
                   type: string
@@ -398,7 +398,7 @@ paths:
                   buttons:
                     - buttonId: "btn_yes"
                       buttonText:
-                        displayText: "Yes, I'm Coming"
+                        displayText: "Yes, I m Coming"
                       type: 1
                     - buttonId: "btn_no"
                       buttonText:
