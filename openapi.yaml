@@ -128,24 +128,6 @@ paths:
       description: Stream high-fidelity rich media assets including documents, audio files, images, and marketing videos directly to recipients along with automated typing simulation workflows.
       tags:
         - Core Messaging Engine
-      x-codeSamples:
-        - lang: bash
-          label: cURL
-          source: |
-            curl --request POST \
-              --url https://app.wachat.net/api/v1/send/media \
-              --header "Authorization: Bearer <token>" \
-              --header "Content-Type: application/json" \
-              --data-raw '{
-                "instanceName": "my-instance-01",
-                "number": "628123456789",
-                "type": "image",
-                "mediaUrl": "https://cdn.pixabay.com/photo/2022/09/23/09/13/promotion-7474039_1280.png",
-                "message": "Check out this month's exciting promotions!",
-                "fileName": "promotion-7474039_1280.png",
-                "mimetype": "image/png",
-                "delay": 1000
-              }'
       requestBody:
         required: true
         content:
@@ -305,44 +287,6 @@ paths:
       description: Streamline quick micro-actions and conversational branches by transmitting clean interactive prompt cards carrying up to three actionable tap-to-reply button components.
       tags:
         - High-Conversion UI Modules
-
-      x-codeSamples:
-        - lang: bash
-          label: cURL
-          source: |
-            curl --request POST \
-              --url https://app.wachat.net/api/v1/send/button \
-              --header "Authorization: Bearer <token>" \
-              --header "Content-Type: application/json" \
-              --data-raw '{
-                "instanceName": "my-instance-01",
-                "number": "628123456789",
-                "type": "interactive",
-                "interactive": {
-                  "type": "button",
-                  "title": "Confirm Attendance",
-                  "body": "Will you be attending the event tomorrow morning?",
-                  "footer": "Wachat",
-                  "buttons": [
-                    {
-                      "buttonId": "btn_yes",
-                      "buttonText": {
-                        "displayText": "Yes, I'\''m Coming"
-                      },
-                      "type": 1
-                    },
-                    {
-                      "buttonId": "btn_no",
-                      "buttonText": {
-                        "displayText": "Sorry, Unable to attend"
-                      },
-                      "type": 1
-                    }
-                  ]
-                },
-                "delay": 123
-              }'
-
       requestBody:
         required: true
         content:
