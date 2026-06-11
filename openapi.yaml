@@ -756,6 +756,169 @@ paths:
         '200':
           description: Collection array containing structural channel groups metadata pulled.
 
+  /instance/create:
+    post:
+      summary: Create WhatsApp Instance
+      description: Create a new WhatsApp instance from an external application. The created instance is saved to your Wachat account and appears automatically in Settings > Instance. WhatsApp Baileys instances return a QR code in the same response.
+      tags:
+        - Session Lifecycle Infrastructure
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - instanceName
+              properties:
+                instanceName:
+                  type: string
+                  description: Friendly instance name. Wachat will add a unique prefix before saving the final instance name.
+                  example: store-jakarta
+
+                number:
+                  type: string
+                  description: Optional WhatsApp phone number with country code.
+                  example: '62811801813'
+
+                integration:
+                  type: string
+                  description: Instance integration type.
+                  enum:
+                    - WHATSAPP-BAILEYS
+                    - WHATSAPP-BUSINESS
+                  default: WHATSAPP-BAILEYS
+                  example: WHATSAPP-BAILEYS
+
+                rejectCalls:
+                  type: boolean
+                  description: Reject incoming WhatsApp calls automatically.
+                  example: false
+
+                ignoreGroups:
+                  type: boolean
+                  description: Ignore group messages for this instance.
+                  example: false
+
+                alwaysOnline:
+                  type: boolean
+                  description: Keep the instance online when possible.
+                  example: true
+
+                readMessages:
+                  type: boolean
+                  description: Mark incoming messages as read.
+                  example: false
+
+                readStatus:
+                  type: boolean
+                  description: Read status updates.
+                  example: false
+
+                metaToken:
+                  type: string
+                  description: Required only for WHATSAPP-BUSINESS integrations.
+
+                metaBusinessId:
+                  type: string
+                  description: Required only for WHATSAPP-BUSINESS integrations.
+
+                metaPhoneNumberId:
+                  type: string
+                  description: Required only for WHATSAPP-BUSINESS integrations.
+
+            examples:
+              baileys:
+                summary: Create a WhatsApp Baileys instance
+                value:
+                  instanceName: store-jakarta
+                  number: '62811801813'
+                  integration: WHATSAPP-BAILEYS
+
+      responses:
+        '201':
+          description: Instance created successfully. For WhatsApp Baileys, the QR code is returned immediately.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+
+                  instance:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 26
+
+                      instanceName:
+                        type: string
+                        description: Final unique instance name. Use this value for future requests.
+                        example: t1_mq9r2jov_store-jakarta
+
+                      displayName:
+                        type: string
+                        example: store-jakarta
+
+                      number:
+                        type: string
+                        example: '62811801813'
+
+                      integration:
+                        type: string
+                        example: WHATSAPP-BAILEYS
+
+                      evolutionInstanceId:
+                        type: string
+                        example: edc7cf26-805e-4feb-8de9-e55934398327
+
+                  qrcode:
+                    type: object
+                    nullable: true
+                    description: QR code data returned for WhatsApp Baileys instances.
+                    properties:
+                      pairingCode:
+                        type: string
+                        nullable: true
+                        example: PKRFWHWE
+
+                      code:
+                        type: string
+                        nullable: true
+
+                      base64:
+                        type: string
+                        nullable: true
+                        description: Base64 image data URI. Use this value as an image src to display the QR code.
+                        example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...
+
+                      count:
+                        type: integer
+                        nullable: true
+                        example: 1
+
+                  qrError:
+                    type: string
+                    nullable: true
+                    description: Present when the instance was created but the QR code could not be fetched.
+                    example: null
+
+        '400':
+          description: Invalid request payload.
+
+        '401':
+          description: Missing or invalid API key.
+
+        '403':
+          description: Subscription, limit, or channel restriction prevented instance creation.
+
+        '502':
+          description: The upstream Evolution API could not create the instance or return a valid instance ID.
+
   /instance/qr:
     get:
       summary: Generate Session Device Authentication QR
