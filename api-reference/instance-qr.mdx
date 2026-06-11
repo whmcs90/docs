@@ -2,3 +2,7 @@
 title: 'Get Instance QR'
 openapi: 'GET /instance/qr'
 ---
+
+Generate a fresh QR code for an existing WhatsApp Baileys instance.
+
+Use the final `instance.instanceName` returned by `POST /instance/create`, not the original friendly name. The QR image is returned in `qrcode.base64` and can be used directly as an image source.
