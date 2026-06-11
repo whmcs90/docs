@@ -29,6 +29,16 @@ You can also use `qrcode.imageUrl` to render the QR code through an image endpoi
 <img src="https://app.wachat.net/api/v1/instance/qr/image?instanceName=t1_mq9r2jov_store-jakarta&apiKey=YOUR_API_KEY" alt="WhatsApp QR Code" />
 ```
 
+For an auto-updating QR display that changes to a success message after the user scans it, use `qrcode.liveUrl`:
+
+```html
+<iframe
+  src="https://app.wachat.net/api/v1/instance/qr/live?instanceName=t1_mq9r2jov_store-jakarta&apiKey=YOUR_API_KEY"
+  width="420"
+  height="460"
+></iframe>
+```
+
 If the QR code expires, request a fresh QR code using `GET /instance/qr`.
 
 ## Return QR Image Directly
