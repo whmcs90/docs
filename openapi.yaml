@@ -920,6 +920,12 @@ paths:
                         description: URL that returns the QR code directly as an image. Add apiKey as a query parameter when using it inside an img tag.
                         example: https://app.wachat.net/api/v1/instance/qr/image?instanceName=t1_mq9r2jov_store-jakarta
 
+                      liveUrl:
+                        type: string
+                        nullable: true
+                        description: URL that returns a live HTML QR page. Add apiKey as a query parameter when using it inside an iframe.
+                        example: https://app.wachat.net/api/v1/instance/qr/live?instanceName=t1_mq9r2jov_store-jakarta
+
                       count:
                         type: integer
                         nullable: true
@@ -1091,6 +1097,41 @@ paths:
 
         '504':
           description: Evolution API request timed out.
+
+  /instance/qr/live:
+    get:
+      summary: Open Live QR Status Page
+      description: Return an HTML page that displays the QR code and automatically changes to a success message after the instance is connected.
+      tags:
+        - Session Lifecycle Infrastructure
+
+      parameters:
+        - in: query
+          name: instanceName
+          required: true
+          schema:
+            type: string
+          description: Final unique instance name returned by Wachat.
+          example: t1_mq9r2jov_store-jakarta
+
+        - in: query
+          name: apiKey
+          required: true
+          schema:
+            type: string
+          description: API key used by the live page to refresh the QR image and poll the connection status.
+          example: YOUR_API_KEY
+
+      responses:
+        '200':
+          description: Live QR HTML page returned successfully.
+          content:
+            text/html:
+              schema:
+                type: string
+
+        '400':
+          description: Missing instanceName or apiKey query parameter.
 
   /instance/state:
     get:
