@@ -20,7 +20,7 @@ paths:
   /check-number:
     get:
       summary: Verify WhatsApp Contact Registration
-      description: Perform an instant validation check on a destination phone number to determine if it is actively registered on the WhatsApp network before executing your messaging payloads.
+      description: Perform an instant validation check on  destination phone number to determine if it is actively registered on the WhatsApp network before executing your messaging payloads.
       tags:
         - Network Validation
 
