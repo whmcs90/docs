@@ -763,6 +763,19 @@ paths:
       tags:
         - Session Lifecycle Infrastructure
 
+      parameters:
+        - in: query
+          name: response
+          required: false
+          schema:
+            type: string
+            enum:
+              - json
+              - image
+            default: json
+          description: Set to image to return the QR code directly as image/png instead of JSON.
+          example: image
+
       requestBody:
         required: true
         content:
@@ -840,6 +853,12 @@ paths:
         '201':
           description: Instance created successfully. For WhatsApp Baileys, the QR code is returned immediately.
           content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+              description: Returned when response=image is provided.
+
             application/json:
               schema:
                 type: object
