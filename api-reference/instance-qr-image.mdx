@@ -1,0 +1,16 @@
+---
+title: 'Get QR Image'
+openapi: 'GET /instance/qr/image'
+---
+
+Return the WhatsApp QR code directly as an image.
+
+This endpoint is useful when you want to display the QR code in a browser, documentation page, or an `<img>` tag. For browser image rendering, pass the API key as a query parameter because image tags cannot send Authorization headers.
+
+```html
+<img src="https://app.wachat.net/api/v1/instance/qr/image?instanceName=t1_mq9r2jov_store-jakarta&apiKey=YOUR_API_KEY" alt="WhatsApp QR Code" />
+```
+
+<Warning>
+  Passing an API key in a URL can expose it in browser history, logs, or analytics. Use this only when you need direct image rendering. For backend integrations, prefer the `Authorization: Bearer YOUR_API_KEY` header.
+</Warning>
