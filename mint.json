@@ -71,6 +71,7 @@
     {
       "group": "Instances",
       "pages": [
+        "api-reference/instance-create",
         "api-reference/instance-qr",
         "api-reference/instance-state",
         "api-reference/instance-logout"
