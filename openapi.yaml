@@ -921,8 +921,8 @@ paths:
 
   /instance/qr:
     get:
-      summary: Generate Session Device Authentication QR
-      description: Retrieve base64 or stream raw token structures required to authenticate, establish handshake protocols, and link your physical WhatsApp device onto a newly provisioned instance framework.
+      summary: Get Instance QR Code
+      description: Generate a fresh QR code for an existing WhatsApp Baileys instance. Use the final instanceName returned by POST /instance/create.
       tags:
         - Session Lifecycle Infrastructure
 
@@ -932,11 +932,87 @@ paths:
           required: true
           schema:
             type: string
-          description: Dedicated system unique identifier naming tracking handle for provisioning execution.
+          description: Final unique instance name returned by Wachat, for example t1_mq9r2jov_store-jakarta.
+          example: t1_mq9r2jov_store-jakarta
 
       responses:
         '200':
-          description: Session linking handshake payload and QR structure prepared.
+          description: QR code generated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+
+                  instance:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 26
+
+                      instanceName:
+                        type: string
+                        example: t1_mq9r2jov_store-jakarta
+
+                      displayName:
+                        type: string
+                        example: store-jakarta
+
+                      integration:
+                        type: string
+                        example: WHATSAPP-BAILEYS
+
+                      evolutionInstanceId:
+                        type: string
+                        example: edc7cf26-805e-4feb-8de9-e55934398327
+
+                  qrcode:
+                    type: object
+                    properties:
+                      pairingCode:
+                        type: string
+                        nullable: true
+                        example: PKRFWHWE
+
+                      code:
+                        type: string
+                        nullable: true
+
+                      base64:
+                        type: string
+                        nullable: true
+                        description: Base64 image data URI. Use this value as an image src to display the QR code.
+                        example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...
+
+                      count:
+                        type: integer
+                        nullable: true
+                        example: 1
+
+        '400':
+          description: Missing instanceName query parameter.
+
+        '401':
+          description: Missing or invalid API key.
+
+        '403':
+          description: Subscription restriction prevented QR generation.
+
+        '404':
+          description: Instance not found for this API key.
+
+        '409':
+          description: QR code is only available for WhatsApp Baileys instances.
+
+        '502':
+          description: Failed to fetch the QR code from the upstream Evolution API.
+
+        '504':
+          description: Evolution API request timed out.
 
   /instance/state:
     get:
