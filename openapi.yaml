@@ -896,6 +896,12 @@ paths:
                         description: Base64 image data URI. Use this value as an image src to display the QR code.
                         example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...
 
+                      imageUrl:
+                        type: string
+                        nullable: true
+                        description: URL that returns the QR code directly as an image. Add apiKey as a query parameter when using it inside an img tag.
+                        example: https://app.wachat.net/api/v1/instance/qr/image?instanceName=t1_mq9r2jov_store-jakarta
+
                       count:
                         type: integer
                         nullable: true
@@ -1010,6 +1016,60 @@ paths:
 
         '502':
           description: Failed to fetch the QR code from the upstream Evolution API.
+
+        '504':
+          description: Evolution API request timed out.
+
+  /instance/qr/image:
+    get:
+      summary: Get Instance QR Image
+      description: Return the QR code directly as an image/png response. This is useful for browser previews, documentation pages, and img tags. You can authenticate using the Authorization bearer header or the apiKey query parameter.
+      tags:
+        - Session Lifecycle Infrastructure
+
+      parameters:
+        - in: query
+          name: instanceName
+          required: true
+          schema:
+            type: string
+          description: Final unique instance name returned by Wachat.
+          example: t1_mq9r2jov_store-jakarta
+
+        - in: query
+          name: apiKey
+          required: false
+          schema:
+            type: string
+          description: Optional API key for direct browser image rendering. Prefer Authorization bearer header for server-to-server requests.
+          example: YOUR_API_KEY
+
+      responses:
+        '200':
+          description: QR code image returned successfully.
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+
+        '400':
+          description: Missing instanceName query parameter.
+
+        '401':
+          description: Missing or invalid API key.
+
+        '403':
+          description: Subscription restriction prevented QR generation.
+
+        '404':
+          description: Instance not found for this API key.
+
+        '409':
+          description: QR code is only available for WhatsApp Baileys instances.
+
+        '502':
+          description: Failed to fetch or decode the QR code image.
 
         '504':
           description: Evolution API request timed out.
