@@ -15,8 +15,18 @@ The instance is automatically saved to your account and will appear in **Setting
 
 Use the `qrcode.base64` value as an image source in your application.
 
+<Warning>
+  The Mintlify API playground shows the QR code value as JSON. It does not automatically render `qrcode.base64` as an image preview.
+</Warning>
+
 ```html
 <img src="data:image/png;base64,..." alt="WhatsApp QR Code" />
+```
+
+You can also use `qrcode.imageUrl` to render the QR code through an image endpoint:
+
+```html
+<img src="https://app.wachat.net/api/v1/instance/qr/image?instanceName=t1_mq9r2jov_store-jakarta&apiKey=YOUR_API_KEY" alt="WhatsApp QR Code" />
 ```
 
 If the QR code expires, request a fresh QR code using `GET /instance/qr`.
