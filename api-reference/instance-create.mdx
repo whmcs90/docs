@@ -1,0 +1,22 @@
+---
+title: 'Create Instance'
+openapi: 'POST /instance/create'
+---
+
+Create a new WhatsApp instance from an external application using your Wachat API key.
+
+The instance is automatically saved to your account and will appear in **Settings > Instance** inside the dashboard. For WhatsApp Baileys instances, the response also includes a QR code immediately, so you do not need to call the QR endpoint after creating the instance.
+
+<Note>
+  Use the `instance.instanceName` value returned by this endpoint for future API calls. Wachat adds a unique prefix to keep instance names safe and unique.
+</Note>
+
+## Displaying the QR Code
+
+Use the `qrcode.base64` value as an image source in your application.
+
+```html
+<img src="data:image/png;base64,..." alt="WhatsApp QR Code" />
+```
+
+If the QR code expires, request a fresh QR code using `GET /instance/qr`.
