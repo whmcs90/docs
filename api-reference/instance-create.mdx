@@ -30,3 +30,21 @@ You can also use `qrcode.imageUrl` to render the QR code through an image endpoi
 ```
 
 If the QR code expires, request a fresh QR code using `GET /instance/qr`.
+
+## Return QR Image Directly
+
+If you want the create request to return the QR code as an image instead of JSON, add `response=image` to the URL:
+
+```bash
+curl -X POST "https://app.wachat.net/api/v1/instance/create?response=image" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "instanceName": "store-jakarta",
+    "number": "62811801813",
+    "integration": "WHATSAPP-BAILEYS"
+  }' \
+  --output qr.png
+```
+
+The instance details are returned in response headers such as `X-Instance-Name` and `X-Pairing-Code`.
