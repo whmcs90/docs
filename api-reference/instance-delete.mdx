@@ -1,0 +1,21 @@
+---
+title: 'Delete Instance'
+openapi: 'DELETE /instance/delete'
+---
+
+Delete a WhatsApp instance from your Wachat account and the Evolution API.
+
+The instance must be logged out first. If the instance is still connected, the API returns `409 Conflict`.
+
+Recommended flow:
+
+```bash
+curl -X DELETE "https://app.wachat.net/api/v1/instance/logout?instanceName=t1_mq9r2jov_store-jakarta" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+
+curl -X GET "https://app.wachat.net/api/v1/instance/state?instanceName=t1_mq9r2jov_store-jakarta" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+
+curl -X DELETE "https://app.wachat.net/api/v1/instance/delete?instanceName=t1_mq9r2jov_store-jakarta" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
