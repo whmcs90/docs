@@ -1041,6 +1041,122 @@ paths:
         '200':
           description: Token storage arrays safely destroyed and instance safely offline.
 
+        '400':
+          description: Missing instanceName query parameter.
+
+        '401':
+          description: Missing or invalid API key.
+
+        '404':
+          description: Instance not found for this API key.
+
+        '502':
+          description: Failed to logout the instance on the upstream Evolution API.
+
+  /instance/delete:
+    delete:
+      summary: Delete WhatsApp Instance
+      description: Delete a WhatsApp instance from Wachat and the upstream Evolution API. The instance must be logged out before deletion. If the instance is still connected, this endpoint returns 409 Conflict.
+      tags:
+        - Session Lifecycle Infrastructure
+
+      parameters:
+        - in: query
+          name: instanceName
+          required: true
+          schema:
+            type: string
+          description: Final unique instance name returned by Wachat.
+          example: t1_mq9r2jov_store-jakarta
+
+      responses:
+        '200':
+          description: Instance deleted successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+
+                  message:
+                    type: string
+                    example: Instance deleted successfully.
+
+                  instance:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 26
+
+                      instanceName:
+                        type: string
+                        example: t1_mq9r2jov_store-jakarta
+
+                      displayName:
+                        type: string
+                        nullable: true
+                        example: store-jakarta
+
+                  connectionState:
+                    type: string
+                    description: Last connection state detected before deletion.
+                    example: close
+
+                  evolutionDeleted:
+                    type: boolean
+                    description: Whether the upstream Evolution instance delete request succeeded.
+                    example: true
+
+                  evolutionInstanceMissing:
+                    type: boolean
+                    description: True when the instance was already missing on the upstream Evolution API.
+                    example: false
+
+        '400':
+          description: Missing instanceName query parameter or unsupported integration.
+
+        '401':
+          description: Missing or invalid API key.
+
+        '403':
+          description: Subscription restriction prevented instance deletion.
+
+        '404':
+          description: Instance not found for this API key.
+
+        '409':
+          description: Instance is still connected or not safely logged out.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+
+                  error:
+                    type: string
+                    example: Instance must be logged out before deletion.
+
+                  reason:
+                    type: string
+                    example: instance_still_connected
+
+                  connectionState:
+                    type: string
+                    example: open
+
+        '502':
+          description: Could not verify state or delete the upstream Evolution instance.
+
+        '504':
+          description: Evolution API request timed out.
+
 components:
   securitySchemes:
     bearerAuth:
