@@ -890,10 +890,6 @@ paths:
                         type: string
                         example: WHATSAPP-BAILEYS
 
-                      evolutionInstanceId:
-                        type: string
-                        example: edc7cf26-805e-4feb-8de9-e55934398327
-
                   qrcode:
                     type: object
                     nullable: true
@@ -947,7 +943,7 @@ paths:
           description: Subscription, limit, or channel restriction prevented instance creation.
 
         '502':
-          description: The upstream Evolution API could not create the instance or return a valid instance ID.
+          description: The Wachat API could not create the instance or return a valid instance ID.
 
   /instance/qr/image:
     get:
@@ -1001,7 +997,7 @@ paths:
           description: Failed to fetch or decode the QR code image.
 
         '504':
-          description: Evolution API request timed out.
+          description: Wachat API request timed out.
 
   /instance/state:
     get:
@@ -1051,12 +1047,12 @@ paths:
           description: Instance not found for this API key.
 
         '502':
-          description: Failed to logout the instance on the upstream Evolution API.
+          description: Failed to logout the instance on the Wachat API.
 
   /instance/delete:
     delete:
       summary: Delete WhatsApp Instance
-      description: Delete a WhatsApp instance from Wachat and the upstream Evolution API. The instance must be logged out before deletion. If the instance is still connected, this endpoint returns 409 Conflict.
+      description: Delete a WhatsApp instance from your Wachat account. The instance must be logged out before deletion. If the instance is still connected, this endpoint returns 409 Conflict.
       tags:
         - Session Lifecycle Infrastructure
 
@@ -1106,14 +1102,14 @@ paths:
                     description: Last connection state detected before deletion.
                     example: close
 
-                  evolutionDeleted:
+                  instanceDeleted:
                     type: boolean
-                    description: Whether the upstream Evolution instance delete request succeeded.
+                    description: Whether the instance delete request succeeded.
                     example: true
 
-                  evolutionInstanceMissing:
+                  instanceMissing:
                     type: boolean
-                    description: True when the instance was already missing on the upstream Evolution API.
+                    description: True when the instance was already missing from the Wachat API.
                     example: false
 
         '400':
@@ -1152,10 +1148,10 @@ paths:
                     example: open
 
         '502':
-          description: Could not verify state or delete the upstream Evolution instance.
+          description: Could not verify state or delete the instance.
 
         '504':
-          description: Evolution API request timed out.
+          description: Wachat API request timed out.
 
 components:
   securitySchemes:
