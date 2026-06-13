@@ -1,0 +1,66 @@
+---
+title: 'List Contacts'
+openapi: 'GET /contacts'
+---
+
+Return saved CRM contacts for a specific WhatsApp instance.
+
+Every contact is filtered by `instanceName`, so contacts from other instances will not be mixed into the response.
+
+```http
+GET https://app.wachat.net/api/v1/contacts?instanceName=t1_mq9r2jov_jakarta_store
+Authorization: Bearer YOUR_API_KEY
+```
+
+```json
+{
+  "success": true,
+  "count": 1,
+  "total": 1,
+  "page": 1,
+  "limit": 50,
+  "hasMore": false,
+  "instance": {
+    "id": 29,
+    "instanceName": "jakarta_store",
+    "displayName": "jakarta_store",
+    "apiInstanceName": "t1_mq9r2jov_jakarta_store",
+    "internalName": "t1_mq9r2jov_jakarta_store"
+  },
+  "contacts": [
+    {
+      "id": 101,
+      "name": "John Customer",
+      "phone": "628123456789",
+      "remoteJid": "628123456789@s.whatsapp.net",
+      "isGroup": false,
+      "profilePicUrl": "https://...",
+      "profilePictureUrl": "https://...",
+      "chat": {
+        "id": 501,
+        "name": "John Customer",
+        "pushName": "John",
+        "lastMessageText": "Hello",
+        "lastMessageTimestamp": "2026-06-13T08:00:00.000Z",
+        "unreadCount": 0
+      },
+      "assignedUserId": null,
+      "assignedDepartmentId": null,
+      "funnelStageId": null,
+      "notes": null,
+      "customData": {},
+      "showTimeInStage": false,
+      "createdAt": "2026-06-13T08:00:00.000Z",
+      "updatedAt": "2026-06-13T08:00:00.000Z"
+    }
+  ]
+}
+```
+
+<Note>
+  Use `apiInstanceName`, for example `t1_mq9r2jov_jakarta_store`, as the `instanceName` query value.
+</Note>
+
+<Note>
+  This endpoint returns saved CRM contacts. If a chat has not been saved as a contact yet, it will not appear here.
+</Note>
