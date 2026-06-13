@@ -75,6 +75,7 @@
         "api-reference/instance-qr-image",
         "api-reference/instance-state",
         "api-reference/instance-profile-picture",
+        "api-reference/instance-list",
         "api-reference/instance-logout",
         "api-reference/instance-delete"
       ]
