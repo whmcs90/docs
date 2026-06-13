@@ -1059,7 +1059,7 @@ paths:
                       instanceName:
                         type: string
                         description: Display name shown in Wachat. This is safe to show in your UI.
-                        example: wa
+                        example: jakarta_store
 
                       apiInstanceName:
                         type: string
@@ -1079,7 +1079,7 @@ paths:
                         type: string
                         nullable: true
                         description: Connected WhatsApp profile name. If WhatsApp returns the internal API name, Wachat normalizes this to the display name.
-                        example: wa
+                        example: jakarta_store
 
                       profilePictureUrl:
                         type: string
