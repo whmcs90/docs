@@ -875,12 +875,22 @@ paths:
 
                       instanceName:
                         type: string
-                        description: Final unique instance name. Use this value for future requests.
-                        example: t1_mq9r2jov_store-jakarta
+                        description: Display name shown in Wachat.
+                        example: store-jakarta
 
                       displayName:
                         type: string
                         example: store-jakarta
+
+                      apiInstanceName:
+                        type: string
+                        description: Unique instance name used for future Wachat API requests.
+                        example: t1_mq9r2jov_store-jakarta
+
+                      internalName:
+                        type: string
+                        description: Same value as apiInstanceName.
+                        example: t1_mq9r2jov_store-jakarta
 
                       number:
                         type: string
