@@ -1,0 +1,58 @@
+---
+title: 'Create Webhook'
+openapi: 'POST /webhooks'
+---
+
+Create a webhook endpoint for your Wachat account.
+
+Webhooks can listen to all instances or only one specific `apiInstanceName`.
+
+Supported events:
+
+```txt
+*
+messages.upsert
+messages.update
+contacts.update
+chats.update
+qrcode.updated
+connection.update
+```
+
+```bash
+curl -X POST "https://app.wachat.net/api/v1/webhooks" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Production webhook",
+    "url": "https://example.com/wachat/webhook",
+    "instanceName": "t1_mq9r2jov_jakarta_store",
+    "events": ["messages.upsert", "connection.update"],
+    "enabled": true
+  }'
+```
+
+To receive events from all instances, omit `instanceName`.
+
+## Delivery Headers
+
+Every webhook delivery includes these headers:
+
+```txt
+X-Wachat-Event
+X-Wachat-Timestamp
+X-Wachat-Signature
+X-Wachat-Webhook-Id
+```
+
+`X-Wachat-Signature` is an HMAC-SHA256 signature of:
+
+```txt
+timestamp.raw_json_body
+```
+
+using your webhook secret.
+
+<Note>
+  The webhook URL must use HTTPS. The secret is returned when creating/updating a webhook. Store it securely.
+</Note>
