@@ -464,6 +464,200 @@ paths:
         '500':
           description: Internal server error.
 
+  /webhooks:
+    get:
+      summary: List Webhooks
+      description: Return webhook endpoints configured for the authenticated Wachat account. Optionally filter by API instance name.
+      tags:
+        - Webhooks
+
+      parameters:
+        - in: query
+          name: instanceName
+          required: false
+          schema:
+            type: string
+          description: Optional API instance name to filter webhooks by instance.
+          example: t1_mq9r2jov_jakarta_store
+
+      responses:
+        '200':
+          description: Webhooks returned successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+
+                  count:
+                    type: integer
+                    example: 1
+
+                  webhooks:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/WebhookSubscription'
+
+        '401':
+          description: Missing or invalid API key.
+
+        '403':
+          description: Subscription restriction prevented webhook lookup.
+
+        '404':
+          description: Instance not found for this API key.
+
+    post:
+      summary: Create or Update Webhook
+      description: Create a new webhook endpoint, or update an existing webhook by passing its id.
+      tags:
+        - Webhooks
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - url
+              properties:
+                id:
+                  type: integer
+                  description: Existing webhook id. Include this to update a webhook.
+                  example: 12
+
+                name:
+                  type: string
+                  example: Production webhook
+
+                url:
+                  type: string
+                  description: HTTPS endpoint that will receive Wachat webhook deliveries.
+                  example: https://example.com/wachat/webhook
+
+                events:
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                      - '*'
+                      - messages.upsert
+                      - messages.update
+                      - contacts.update
+                      - chats.update
+                      - qrcode.updated
+                      - connection.update
+                  example:
+                    - messages.upsert
+                    - connection.update
+
+                instanceName:
+                  type: string
+                  description: Optional API instance name. Omit this to receive events for all instances in the account.
+                  example: t1_mq9r2jov_jakarta_store
+
+                enabled:
+                  type: boolean
+                  default: true
+                  example: true
+
+                secret:
+                  type: string
+                  description: Optional custom webhook secret. If omitted, Wachat generates one.
+                  example: whsec_your_custom_secret
+
+      responses:
+        '200':
+          description: Webhook updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+
+                  webhook:
+                    $ref: '#/components/schemas/WebhookSubscription'
+
+        '201':
+          description: Webhook created successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+
+                  webhook:
+                    $ref: '#/components/schemas/WebhookSubscription'
+
+        '400':
+          description: Invalid payload, unsupported event, or non-HTTPS URL.
+
+        '401':
+          description: Missing or invalid API key.
+
+        '403':
+          description: Subscription restriction prevented webhook creation.
+
+        '404':
+          description: Instance or webhook not found.
+
+    delete:
+      summary: Delete Webhook
+      description: Delete a webhook endpoint by id.
+      tags:
+        - Webhooks
+
+      parameters:
+        - in: query
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: Webhook id.
+          example: 12
+
+      responses:
+        '200':
+          description: Webhook deleted successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+
+                  deleted:
+                    type: boolean
+                    example: true
+
+                  id:
+                    type: integer
+                    example: 12
+
+        '400':
+          description: Missing webhook id.
+
+        '401':
+          description: Missing or invalid API key.
+
+        '403':
+          description: Subscription restriction prevented webhook deletion.
+
+        '404':
+          description: Webhook not found.
+
   /send/text:
     post:
       summary: Dispatch Conversational Text Message
@@ -1845,6 +2039,69 @@ components:
         isLimitReached:
           type: boolean
           example: false
+
+    WebhookSubscription:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 12
+
+        name:
+          type: string
+          nullable: true
+          example: Production webhook
+
+        url:
+          type: string
+          example: https://example.com/wachat/webhook
+
+        events:
+          type: array
+          items:
+            type: string
+          example:
+            - messages.upsert
+            - connection.update
+
+        enabled:
+          type: boolean
+          example: true
+
+        secret:
+          type: string
+          description: Masked in list responses. Returned in full when creating or updating a webhook.
+          example: whsec_••••abcdef
+
+        instance:
+          type: object
+          nullable: true
+          properties:
+            instanceName:
+              type: string
+              example: jakarta_store
+
+            displayName:
+              type: string
+              example: jakarta_store
+
+            apiInstanceName:
+              type: string
+              example: t1_mq9r2jov_jakarta_store
+
+            internalName:
+              type: string
+              example: t1_mq9r2jov_jakarta_store
+
+        createdAt:
+          type: string
+          format: date-time
+          example: '2026-06-13T08:00:00.000Z'
+
+        updatedAt:
+          type: string
+          format: date-time
+          example: '2026-06-13T08:00:00.000Z'
 
   securitySchemes:
     bearerAuth:
