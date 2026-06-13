@@ -45,7 +45,8 @@
     {
       "group": "API Reference",
       "pages": [
-        "api-reference/introduction"
+        "api-reference/introduction",
+        "api-reference/account-limits"
       ]
     },
     {
@@ -72,10 +73,10 @@
       "group": "Instances",
       "pages": [
         "api-reference/instance-create",
+        "api-reference/instance-list",
         "api-reference/instance-qr-image",
         "api-reference/instance-state",
         "api-reference/instance-profile-picture",
-        "api-reference/instance-list",
         "api-reference/instance-logout",
         "api-reference/instance-delete"
       ]
