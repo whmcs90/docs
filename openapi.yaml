@@ -1012,7 +1012,7 @@ paths:
   /instance/state:
     get:
       summary: Get Instance State
-      description: Check whether a WhatsApp instance is connected. When the instance is connected, the response can include the detected WhatsApp number and profile information.
+      description: Check whether a WhatsApp instance is connected. Send the unique API instance name in the query parameter. When the instance is connected, the normalized response includes the display name, API instance name, detected WhatsApp number, and profile information when available.
       tags:
         - Session Lifecycle Infrastructure
 
@@ -1022,7 +1022,7 @@ paths:
           required: true
           schema:
             type: string
-          description: Final unique API instance name returned by Wachat.
+          description: Unique API instance name returned by Wachat. Use apiInstanceName from the create or state response.
           example: t1_mqc3zame_wa
 
       responses:
@@ -1039,7 +1039,7 @@ paths:
 
                   data:
                     type: object
-                    description: Raw state payload returned by Wachat.
+                    description: Raw state payload returned by Wachat. This may contain the internal API instance name.
                     properties:
                       instance:
                         type: object
@@ -1054,16 +1054,16 @@ paths:
 
                   instance:
                     type: object
-                    description: Normalized instance state and profile data.
+                    description: Normalized instance state and profile data for UI and API usage.
                     properties:
                       instanceName:
                         type: string
-                        description: Display name shown in Wachat.
+                        description: Display name shown in Wachat. This is safe to show in your UI.
                         example: wa
 
                       apiInstanceName:
                         type: string
-                        description: Unique API instance name to use in API calls.
+                        description: Unique API instance name to use in future API calls.
                         example: t1_mqc3zame_wa
 
                       internalName:
@@ -1078,7 +1078,8 @@ paths:
                       profileName:
                         type: string
                         nullable: true
-                        example: Wachat Store
+                        description: Connected WhatsApp profile name. If WhatsApp returns the internal API name, Wachat normalizes this to the display name.
+                        example: wa
 
                       profilePictureUrl:
                         type: string
