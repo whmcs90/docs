@@ -1023,7 +1023,7 @@ paths:
           schema:
             type: string
           description: Unique API instance name returned by Wachat. Use apiInstanceName from the create or state response.
-          example: t1_mqc3zame_wa
+          example: t1_mqc3zame_jakarta_store
 
       responses:
         '200':
@@ -1046,7 +1046,7 @@ paths:
                         properties:
                           instanceName:
                             type: string
-                            example: t1_mqc3zame_wa
+                            example: t1_mqc3zame_jakarta_store
 
                           state:
                             type: string
@@ -1064,12 +1064,12 @@ paths:
                       apiInstanceName:
                         type: string
                         description: Unique API instance name to use in future API calls.
-                        example: t1_mqc3zame_wa
+                        example: t1_mqc3zame_jakarta_store
 
                       internalName:
                         type: string
                         description: Internal API instance name.
-                        example: t1_mqc3zame_wa
+                        example: t1_mqc3zame_jakarta_store
 
                       state:
                         type: string
@@ -1096,12 +1096,12 @@ paths:
                       number:
                         type: string
                         nullable: true
-                        example: '62811801813'
+                        example: '628123456789'
 
                       owner:
                         type: string
                         nullable: true
-                        example: 62811801813@s.whatsapp.net
+                        example: 628123456789@s.whatsapp.net
 
                       integration:
                         type: string
