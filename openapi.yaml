@@ -1011,8 +1011,8 @@ paths:
 
   /instance/state:
     get:
-      summary: Monitor Instance Connection Status Health
-      description: Retrieve granular, real-time diagnostic health statuses to confirm if your container instance pipeline is actively authenticated, sleeping, or disconnected from server fabrics.
+      summary: Get Instance State
+      description: Check whether a WhatsApp instance is connected. When the instance is connected, the response can include the detected WhatsApp number and profile information.
       tags:
         - Session Lifecycle Infrastructure
 
@@ -1022,11 +1022,161 @@ paths:
           required: true
           schema:
             type: string
-          description: Assigned target profile registration name parameter.
+          description: Final unique API instance name returned by Wachat.
+          example: t1_mqc3zame_wa
 
       responses:
         '200':
-          description: Diagnostic runtime operational metrics evaluated.
+          description: Instance state returned successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+
+                  data:
+                    type: object
+                    description: Raw state payload returned by Wachat.
+                    properties:
+                      instance:
+                        type: object
+                        properties:
+                          instanceName:
+                            type: string
+                            example: t1_mqc3zame_wa
+
+                          state:
+                            type: string
+                            example: open
+
+                  instance:
+                    type: object
+                    description: Normalized instance state and profile data.
+                    properties:
+                      instanceName:
+                        type: string
+                        description: Display name shown in Wachat.
+                        example: wa
+
+                      apiInstanceName:
+                        type: string
+                        description: Unique API instance name to use in API calls.
+                        example: t1_mqc3zame_wa
+
+                      internalName:
+                        type: string
+                        description: Internal API instance name.
+                        example: t1_mqc3zame_wa
+
+                      state:
+                        type: string
+                        example: open
+
+                      profileName:
+                        type: string
+                        nullable: true
+                        example: Wachat Store
+
+                      profilePictureUrl:
+                        type: string
+                        nullable: true
+                        description: WhatsApp profile picture URL when returned by WhatsApp.
+                        example: https://pps.whatsapp.net/v/t61.24694-24/example.jpg
+
+                      profilePicUrl:
+                        type: string
+                        nullable: true
+                        description: Alias of profilePictureUrl.
+                        example: https://pps.whatsapp.net/v/t61.24694-24/example.jpg
+
+                      number:
+                        type: string
+                        nullable: true
+                        example: '62811801813'
+
+                      owner:
+                        type: string
+                        nullable: true
+                        example: 62811801813@s.whatsapp.net
+
+                      integration:
+                        type: string
+                        nullable: true
+                        example: WHATSAPP-BAILEYS
+
+        '400':
+          description: Missing instanceName query parameter.
+
+        '401':
+          description: Missing or invalid API key.
+
+        '403':
+          description: Subscription restriction prevented state lookup.
+
+        '404':
+          description: Instance not found for this API key.
+
+        '500':
+          description: Internal server error.
+
+  /instance/profile-picture:
+    get:
+      summary: Get Instance Profile Picture
+      description: Return the connected WhatsApp profile picture directly as an image. You can authenticate using the Authorization bearer header or the apiKey query parameter for browser image rendering.
+      tags:
+        - Session Lifecycle Infrastructure
+
+      parameters:
+        - in: query
+          name: instanceName
+          required: true
+          schema:
+            type: string
+          description: Final unique API instance name returned by Wachat.
+          example: t1_mqc3zame_wa
+
+        - in: query
+          name: apiKey
+          required: false
+          schema:
+            type: string
+          description: Optional API key for direct browser image rendering. Prefer Authorization bearer header for server-to-server requests.
+          example: YOUR_API_KEY
+
+      responses:
+        '200':
+          description: Profile picture image returned successfully.
+          content:
+            image/jpeg:
+              schema:
+                type: string
+                format: binary
+
+            image/png:
+              schema:
+                type: string
+                format: binary
+
+        '400':
+          description: Missing instanceName query parameter.
+
+        '401':
+          description: Missing or invalid API key.
+
+        '403':
+          description: Subscription restriction prevented profile picture lookup.
+
+        '404':
+          description: Instance or profile picture not found.
+
+        '502':
+          description: Could not fetch or load the profile picture.
+
+        '504':
+          description: Wachat API request timed out.
 
   /instance/logout:
     delete:
