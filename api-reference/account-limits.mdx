@@ -1,0 +1,70 @@
+---
+title: 'Get Account Limits'
+openapi: 'GET /account/limits'
+---
+
+Return the authenticated account plan, subscription status, current usage, limits, and enabled features.
+
+Use this endpoint before creating instances, importing contacts, or sending high-volume messages so your external application can show remaining quota clearly.
+
+```json
+{
+  "success": true,
+  "account": {
+    "teamId": 25,
+    "teamName": "Jhon Doe Team"
+  },
+  "plan": {
+    "id": 2,
+    "name": "Pro",
+    "interval": "month",
+    "currency": "usd",
+    "amount": 2900
+  },
+  "subscription": {
+    "status": "active",
+    "hasAccess": true,
+    "isExpired": false,
+    "isTrial": false,
+    "isCancelled": false,
+    "isPending": false,
+    "isPastDue": false,
+    "effectiveExpiry": "2026-07-13T08:00:00.000Z",
+    "currentPeriodEnd": "2026-07-13T08:00:00.000Z",
+    "trialEndsAt": null,
+    "expiresAt": null
+  },
+  "limits": {
+    "users": {
+      "limit": 5,
+      "used": 2,
+      "remaining": 3,
+      "isLimitReached": false
+    },
+    "contacts": {
+      "limit": 10000,
+      "used": 1240,
+      "remaining": 8760,
+      "isLimitReached": false
+    },
+    "instances": {
+      "limit": 3,
+      "used": 1,
+      "remaining": 2,
+      "isLimitReached": false
+    },
+    "messages": null
+  },
+  "features": {
+    "ai": true,
+    "flowBuilder": true,
+    "campaigns": true,
+    "templates": true,
+    "voiceCalls": false
+  }
+}
+```
+
+<Note>
+  A limit value of `Unlimited` means the plan does not restrict that resource.
+</Note>
