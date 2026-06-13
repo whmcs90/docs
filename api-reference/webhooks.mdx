@@ -1,72 +1,22 @@
 ---
-title: 'Webhook Settings'
+title: 'List Webhooks'
 openapi: 'GET /webhooks'
 ---
 
-Create and manage customer webhook endpoints for your Wachat account.
+Return webhook endpoints configured for your Wachat account.
 
-Webhooks can listen to all instances or only one specific `apiInstanceName`.
-
-Supported events:
-
-```txt
-*
-messages.upsert
-messages.update
-contacts.update
-chats.update
-qrcode.updated
-connection.update
-```
-
-## Create Webhook
-
-```bash
-curl -X POST "https://app.wachat.net/api/v1/webhooks" \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "Production webhook",
-    "url": "https://example.com/wachat/webhook",
-    "instanceName": "t1_mq9r2jov_jakarta_store",
-    "events": ["messages.upsert", "connection.update"],
-    "enabled": true
-  }'
-```
-
-## List Webhooks
+Use `instanceName` only when you want to filter webhooks for one specific `apiInstanceName`.
 
 ```bash
 curl "https://app.wachat.net/api/v1/webhooks" \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
 
-## Delete Webhook
-
 ```bash
-curl -X DELETE "https://app.wachat.net/api/v1/webhooks?id=12" \
+curl "https://app.wachat.net/api/v1/webhooks?instanceName=t1_mq9r2jov_jakarta_store" \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
 
-## Delivery Headers
-
-Every webhook delivery includes these headers:
-
-```txt
-X-Wachat-Event
-X-Wachat-Timestamp
-X-Wachat-Signature
-X-Wachat-Webhook-Id
-```
-
-`X-Wachat-Signature` is an HMAC-SHA256 signature of:
-
-```txt
-timestamp.raw_json_body
-```
-
-using your webhook secret.
-
 <Note>
-  The webhook URL must use HTTPS. The secret is returned when creating/updating a webhook. Store it securely.
+  Webhook secrets are masked in list responses. The full secret is returned when creating or updating a webhook.
 </Note>
