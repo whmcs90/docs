@@ -232,6 +232,238 @@ paths:
                         type: string
                         description: The session instance handling this lookup.
 
+  /contacts:
+    get:
+      summary: List Contacts
+      description: Return saved CRM contacts for a specific WhatsApp instance. Contacts are filtered by the API instance name so contacts from other instances are never mixed into the response.
+      tags:
+        - Contacts
+
+      parameters:
+        - in: query
+          name: instanceName
+          required: true
+          schema:
+            type: string
+          description: Unique API instance name returned by Wachat.
+          example: t1_mq9r2jov_jakarta_store
+
+        - in: query
+          name: q
+          required: false
+          schema:
+            type: string
+          description: Optional search text. Matches contact name, phone/JID, chat name, or push name.
+          example: John
+
+        - in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            default: 1
+            minimum: 1
+          description: Page number.
+          example: 1
+
+        - in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+            default: 50
+            minimum: 1
+            maximum: 100
+          description: Number of contacts per page. Maximum 100.
+          example: 50
+
+        - in: query
+          name: includeGroups
+          required: false
+          schema:
+            type: boolean
+            default: false
+          description: Include group chats saved as contacts.
+          example: false
+
+      responses:
+        '200':
+          description: Contacts returned successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+
+                  count:
+                    type: integer
+                    example: 1
+
+                  total:
+                    type: integer
+                    example: 1
+
+                  page:
+                    type: integer
+                    example: 1
+
+                  limit:
+                    type: integer
+                    example: 50
+
+                  hasMore:
+                    type: boolean
+                    example: false
+
+                  instance:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 29
+
+                      instanceName:
+                        type: string
+                        description: Display name shown in Wachat.
+                        example: jakarta_store
+
+                      displayName:
+                        type: string
+                        example: jakarta_store
+
+                      apiInstanceName:
+                        type: string
+                        description: Unique API instance name to use in future API calls.
+                        example: t1_mq9r2jov_jakarta_store
+
+                      internalName:
+                        type: string
+                        example: t1_mq9r2jov_jakarta_store
+
+                  contacts:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 101
+
+                        name:
+                          type: string
+                          example: John Customer
+
+                        phone:
+                          type: string
+                          nullable: true
+                          example: '628123456789'
+
+                        remoteJid:
+                          type: string
+                          example: 628123456789@s.whatsapp.net
+
+                        isGroup:
+                          type: boolean
+                          example: false
+
+                        profilePicUrl:
+                          type: string
+                          nullable: true
+                          example: https://pps.whatsapp.net/v/t61.24694-24/example.jpg
+
+                        profilePictureUrl:
+                          type: string
+                          nullable: true
+                          example: https://pps.whatsapp.net/v/t61.24694-24/example.jpg
+
+                        chat:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 501
+
+                            name:
+                              type: string
+                              nullable: true
+                              example: John Customer
+
+                            pushName:
+                              type: string
+                              nullable: true
+                              example: John
+
+                            lastMessageText:
+                              type: string
+                              nullable: true
+                              example: Hello
+
+                            lastMessageTimestamp:
+                              type: string
+                              nullable: true
+                              format: date-time
+                              example: '2026-06-13T08:00:00.000Z'
+
+                            unreadCount:
+                              type: integer
+                              example: 0
+
+                        assignedUserId:
+                          type: integer
+                          nullable: true
+                          example: null
+
+                        assignedDepartmentId:
+                          type: integer
+                          nullable: true
+                          example: null
+
+                        funnelStageId:
+                          type: integer
+                          nullable: true
+                          example: null
+
+                        notes:
+                          type: string
+                          nullable: true
+                          example: null
+
+                        customData:
+                          type: object
+                          example: {}
+
+                        showTimeInStage:
+                          type: boolean
+                          example: false
+
+                        createdAt:
+                          type: string
+                          format: date-time
+                          example: '2026-06-13T08:00:00.000Z'
+
+                        updatedAt:
+                          type: string
+                          format: date-time
+                          example: '2026-06-13T08:00:00.000Z'
+
+        '400':
+          description: Missing instanceName query parameter.
+
+        '401':
+          description: Missing or invalid API key.
+
+        '403':
+          description: Subscription restriction prevented contacts lookup.
+
+        '404':
+          description: Instance not found for this API key.
+
+        '500':
+          description: Internal server error.
+
   /send/text:
     post:
       summary: Dispatch Conversational Text Message
