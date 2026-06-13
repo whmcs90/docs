@@ -793,7 +793,7 @@ paths:
                 number:
                   type: string
                   description: Optional WhatsApp phone number with country code.
-                  example: '62811801813'
+                  example: '628123456789'
 
                 integration:
                   type: string
@@ -846,7 +846,7 @@ paths:
                 summary: Create a WhatsApp Baileys instance
                 value:
                   instanceName: store-jakarta
-                  number: '62811801813'
+                  number: '628123456789'
                   integration: WHATSAPP-BAILEYS
 
       responses:
@@ -894,7 +894,7 @@ paths:
 
                       number:
                         type: string
-                        example: '62811801813'
+                        example: '628123456789'
 
                       integration:
                         type: string
