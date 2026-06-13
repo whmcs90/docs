@@ -2,3 +2,41 @@
 title: 'Get Instance State'
 openapi: 'GET /instance/state'
 ---
+
+Check whether a WhatsApp instance is connected.
+
+When the instance is already connected, the response also includes the detected WhatsApp number and profile fields when they are available.
+
+Use the unique API instance name in the `instanceName` query parameter. In the normalized response, `instance.instanceName` is the display name shown in Wachat, while `instance.apiInstanceName` is the unique name you should keep using for API calls.
+
+```json
+{
+  "success": true,
+  "data": {
+    "instance": {
+      "instanceName": "jakarta_store",
+      "state": "open"
+    }
+  },
+  "instance": {
+    "instanceName": "jakarta_store",
+    "apiInstanceName": "t1_mqc3zame_jakarta_store",
+    "internalName": "t1_mqc3zame_wa",
+    "state": "open",
+    "profileName": "wa",
+    "profilePictureUrl": "https://pps.whatsapp.net/...",
+    "profilePicUrl": "https://pps.whatsapp.net/...",
+    "number": "628123456789",
+    "owner": "628123456789@s.whatsapp.net",
+    "integration": "WHATSAPP-BAILEYS"
+  }
+}
+```
+
+<Note>
+  If WhatsApp returns the internal API instance name as the profile name, Wachat normalizes it back to the display name so your UI can show a clean name such as `wa`.
+</Note>
+
+<Note>
+  `profilePictureUrl` may be `null` if WhatsApp does not return a public profile photo for the connected account. For browser image rendering, use the Profile Picture endpoint instead of loading the WhatsApp URL directly.
+</Note>
