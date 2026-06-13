@@ -17,6 +17,168 @@ security:
 
 paths:
 
+  /account/limits:
+    get:
+      summary: Get Account Limits
+      description: Return the authenticated account plan, subscription status, current usage, limits, and enabled features.
+      tags:
+        - Account
+
+      responses:
+        '200':
+          description: Account limits returned successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+
+                  account:
+                    type: object
+                    properties:
+                      teamId:
+                        type: integer
+                        example: 25
+
+                      teamName:
+                        type: string
+                        example: Jakarta Team
+
+                  plan:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        nullable: true
+                        example: 2
+
+                      name:
+                        type: string
+                        nullable: true
+                        example: Pro
+
+                      interval:
+                        type: string
+                        nullable: true
+                        example: month
+
+                      currency:
+                        type: string
+                        nullable: true
+                        example: usd
+
+                      amount:
+                        type: integer
+                        nullable: true
+                        example: 2900
+
+                  subscription:
+                    type: object
+                    properties:
+                      status:
+                        type: string
+                        example: active
+
+                      hasAccess:
+                        type: boolean
+                        example: true
+
+                      isExpired:
+                        type: boolean
+                        example: false
+
+                      isTrial:
+                        type: boolean
+                        example: false
+
+                      isCancelled:
+                        type: boolean
+                        example: false
+
+                      isPending:
+                        type: boolean
+                        example: false
+
+                      isPastDue:
+                        type: boolean
+                        example: false
+
+                      effectiveExpiry:
+                        type: string
+                        nullable: true
+                        format: date-time
+                        example: '2026-07-13T08:00:00.000Z'
+
+                      currentPeriodEnd:
+                        type: string
+                        nullable: true
+                        format: date-time
+                        example: '2026-07-13T08:00:00.000Z'
+
+                      trialEndsAt:
+                        type: string
+                        nullable: true
+                        format: date-time
+                        example: null
+
+                      expiresAt:
+                        type: string
+                        nullable: true
+                        format: date-time
+                        example: null
+
+                  limits:
+                    type: object
+                    properties:
+                      users:
+                        $ref: '#/components/schemas/UsageLimit'
+
+                      contacts:
+                        $ref: '#/components/schemas/UsageLimit'
+
+                      instances:
+                        $ref: '#/components/schemas/UsageLimit'
+
+                      messages:
+                        nullable: true
+                        allOf:
+                          - $ref: '#/components/schemas/UsageLimit'
+
+                  features:
+                    type: object
+                    properties:
+                      ai:
+                        type: boolean
+                        example: true
+
+                      flowBuilder:
+                        type: boolean
+                        example: true
+
+                      campaigns:
+                        type: boolean
+                        example: true
+
+                      templates:
+                        type: boolean
+                        example: true
+
+                      voiceCalls:
+                        type: boolean
+                        example: false
+
+        '401':
+          description: Missing or invalid API key.
+
+        '403':
+          description: Subscription restriction prevented account limit lookup.
+
+        '500':
+          description: Internal server error.
+
   /check-number:
     get:
       summary: Verify WhatsApp Contact Registration
@@ -1428,6 +1590,30 @@ paths:
           description: Wachat API request timed out.
 
 components:
+  schemas:
+    UsageLimit:
+      type: object
+      properties:
+        limit:
+          oneOf:
+            - type: integer
+            - type: string
+          example: 3
+
+        used:
+          type: integer
+          example: 1
+
+        remaining:
+          oneOf:
+            - type: integer
+            - type: string
+          example: 2
+
+        isLimitReached:
+          type: boolean
+          example: false
+
   securitySchemes:
     bearerAuth:
       type: http
