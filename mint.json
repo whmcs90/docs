@@ -45,7 +45,12 @@
     {
       "group": "API Reference",
       "pages": [
-        "api-reference/introduction",
+        "api-reference/introduction"
+      ]
+    },
+    {
+      "group": "Account",
+      "pages": [
         "api-reference/account-limits"
       ]
     },
