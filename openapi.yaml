@@ -788,7 +788,7 @@ paths:
                 instanceName:
                   type: string
                   description: Friendly instance name. Wachat will add a unique prefix before saving the final instance name.
-                  example: store-jakarta
+                  example: jakarta_store
 
                 number:
                   type: string
@@ -845,7 +845,7 @@ paths:
               baileys:
                 summary: Create a WhatsApp Baileys instance
                 value:
-                  instanceName: store-jakarta
+                  instanceName: jakarta_store
                   number: '628123456789'
                   integration: WHATSAPP-BAILEYS
 
@@ -876,21 +876,21 @@ paths:
                       instanceName:
                         type: string
                         description: Display name shown in Wachat.
-                        example: store-jakarta
+                        example: jakarta_store
 
                       displayName:
                         type: string
-                        example: store-jakarta
+                        example: jakarta_store
 
                       apiInstanceName:
                         type: string
                         description: Unique instance name used for future Wachat API requests.
-                        example: t1_mq9r2jov_store-jakarta
+                        example: t1_mq9r2jov_jakarta_store
 
                       internalName:
                         type: string
                         description: Same value as apiInstanceName.
-                        example: t1_mq9r2jov_store-jakarta
+                        example: t1_mq9r2jov_jakarta_store
 
                       number:
                         type: string
@@ -924,13 +924,13 @@ paths:
                         type: string
                         nullable: true
                         description: URL that returns the QR code directly as an image. Add apiKey as a query parameter when using it inside an img tag.
-                        example: https://app.wachat.net/api/v1/instance/qr/image?instanceName=t1_mq9r2jov_store-jakarta
+                        example: https://app.wachat.net/api/v1/instance/qr/image?instanceName=t1_mq9r2jov_jakarta_store
 
                       liveUrl:
                         type: string
                         nullable: true
                         description: URL that returns a live HTML QR page. Add apiKey as a query parameter when using it inside an iframe.
-                        example: https://app.wachat.net/api/v1/instance/qr/live?instanceName=t1_mq9r2jov_store-jakarta
+                        example: https://app.wachat.net/api/v1/instance/qr/live?instanceName=t1_mq9r2jov_jakarta_store
 
                       count:
                         type: integer
@@ -955,6 +955,119 @@ paths:
         '502':
           description: The Wachat API could not create the instance or return a valid instance ID.
 
+  /instance/list:
+    get:
+      summary: List WhatsApp Instances
+      description: Return all WhatsApp instances that belong to the authenticated Wachat account, including display name, API instance name, connection status, number, and profile data when available.
+      tags:
+        - Session Lifecycle Infrastructure
+
+      responses:
+        '200':
+          description: Instance list returned successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+
+                  count:
+                    type: integer
+                    example: 1
+
+                  instances:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 29
+
+                        instanceName:
+                          type: string
+                          description: Display name shown in Wachat.
+                          example: jakarta_store
+
+                        displayName:
+                          type: string
+                          description: Display name shown in Wachat.
+                          example: jakarta_store
+
+                        apiInstanceName:
+                          type: string
+                          description: Unique API instance name to use in future API calls.
+                          example: t1_mq9r2jov_jakarta_store
+
+                        internalName:
+                          type: string
+                          description: Internal API instance name. Same value as apiInstanceName.
+                          example: t1_mq9r2jov_jakarta_store
+
+                        state:
+                          type: string
+                          example: open
+
+                        status:
+                          type: string
+                          example: open
+
+                        isConnected:
+                          type: boolean
+                          example: true
+
+                        number:
+                          type: string
+                          nullable: true
+                          example: '628123456789'
+
+                        profileName:
+                          type: string
+                          nullable: true
+                          example: jakarta_store
+
+                        profilePictureUrl:
+                          type: string
+                          nullable: true
+                          example: https://pps.whatsapp.net/v/t61.24694-24/example.jpg
+
+                        profilePicUrl:
+                          type: string
+                          nullable: true
+                          description: Alias of profilePictureUrl.
+                          example: https://pps.whatsapp.net/v/t61.24694-24/example.jpg
+
+                        owner:
+                          type: string
+                          nullable: true
+                          example: 628123456789@s.whatsapp.net
+
+                        integration:
+                          type: string
+                          example: WHATSAPP-BAILEYS
+
+                        createdAt:
+                          type: string
+                          format: date-time
+                          example: '2026-06-13T08:00:00.000Z'
+
+                        updatedAt:
+                          type: string
+                          format: date-time
+                          example: '2026-06-13T08:00:00.000Z'
+
+        '401':
+          description: Missing or invalid API key.
+
+        '403':
+          description: Subscription restriction prevented instance list lookup.
+
+        '500':
+          description: Internal server error.
+
   /instance/qr/image:
     get:
       summary: Get Instance QR Image
@@ -969,7 +1082,7 @@ paths:
           schema:
             type: string
           description: Final unique instance name returned by Wachat.
-          example: t1_mq9r2jov_store-jakarta
+          example: t1_mq9r2jov_jakarta_store
 
         - in: query
           name: apiKey
@@ -1023,7 +1136,7 @@ paths:
           schema:
             type: string
           description: Unique API instance name returned by Wachat. Use apiInstanceName from the create or state response.
-          example: t1_mqc3zame_jakarta_store
+          example: t1_mq9r2jov_jakarta_store
 
       responses:
         '200':
@@ -1046,7 +1159,7 @@ paths:
                         properties:
                           instanceName:
                             type: string
-                            example: t1_mqc3zame_jakarta_store
+                            example: t1_mq9r2jov_jakarta_store
 
                           state:
                             type: string
@@ -1064,12 +1177,12 @@ paths:
                       apiInstanceName:
                         type: string
                         description: Unique API instance name to use in future API calls.
-                        example: t1_mqc3zame_jakarta_store
+                        example: t1_mq9r2jov_jakarta_store
 
                       internalName:
                         type: string
                         description: Internal API instance name.
-                        example: t1_mqc3zame_jakarta_store
+                        example: t1_mq9r2jov_jakarta_store
 
                       state:
                         type: string
@@ -1137,7 +1250,7 @@ paths:
           schema:
             type: string
           description: Final unique API instance name returned by Wachat.
-          example: t1_mqc3zame_wa
+          example: t1_mq9r2jov_jakarta_store
 
         - in: query
           name: apiKey
@@ -1224,7 +1337,7 @@ paths:
           schema:
             type: string
           description: Final unique instance name returned by Wachat.
-          example: t1_mq9r2jov_store-jakarta
+          example: t1_mq9r2jov_jakarta_store
 
       responses:
         '200':
@@ -1251,12 +1364,12 @@ paths:
 
                       instanceName:
                         type: string
-                        example: t1_mq9r2jov_store-jakarta
+                        example: t1_mq9r2jov_jakarta_store
 
                       displayName:
                         type: string
                         nullable: true
-                        example: store-jakarta
+                        example: jakarta_store
 
                   connectionState:
                     type: string
