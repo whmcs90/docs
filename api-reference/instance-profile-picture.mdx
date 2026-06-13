@@ -1,0 +1,16 @@
+---
+title: 'Get Profile Picture'
+openapi: 'GET /instance/profile-picture'
+---
+
+Return the connected WhatsApp profile picture directly as an image.
+
+This endpoint is useful when you want to display the connected account avatar in a browser, documentation page, or an `<img>` tag. For browser image rendering, pass the API key as a query parameter because image tags cannot send Authorization headers.
+
+```html
+<img src="https://app.wachat.net/api/v1/instance/profile-picture?instanceName=t1_mqc3zame_wa&apiKey=YOUR_API_KEY" alt="WhatsApp Profile Picture" />
+```
+
+<Warning>
+  Passing an API key in a URL can expose it in browser history, logs, or analytics. Use this only when you need direct image rendering. For backend integrations, prefer the `Authorization: Bearer YOUR_API_KEY` header.
+</Warning>
