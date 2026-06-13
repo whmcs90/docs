@@ -1,0 +1,13 @@
+---
+title: 'Delete Webhook'
+openapi: 'DELETE /webhooks'
+---
+
+Delete a webhook endpoint by id.
+
+```bash
+curl -X DELETE "https://app.wachat.net/api/v1/webhooks?id=12" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+After deletion, Wachat will stop sending events to that webhook URL.
