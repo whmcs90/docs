@@ -92,18 +92,18 @@
         "api-reference/contacts"
       ]
     },
+	{
+      "group": "Numbers",
+      "pages": [
+        "api-reference/check-number"
+      ]
+    },
     {
       "group": "Webhooks",
       "pages": [
         "api-reference/webhooks",
         "api-reference/webhooks-create",
         "api-reference/webhooks-delete"
-      ]
-    },
-    {
-      "group": "Numbers",
-      "pages": [
-        "api-reference/check-number"
       ]
     }
   ]
