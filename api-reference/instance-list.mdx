@@ -1,0 +1,39 @@
+---
+title: 'List Instances'
+openapi: 'GET /instance/list'
+---
+
+Return all WhatsApp instances that belong to the authenticated Wachat account.
+
+Use this endpoint when your external application needs to show available instances, connection status, profile data, and the `apiInstanceName` required for future API calls.
+
+```json
+{
+  "success": true,
+  "count": 1,
+  "instances": [
+    {
+      "id": 29,
+      "instanceName": "jakarta_store",
+      "displayName": "jakarta_store",
+      "apiInstanceName": "t1_mq9r2jov_jakarta_store",
+      "internalName": "t1_mq9r2jov_jakarta_store",
+      "state": "open",
+      "status": "open",
+      "isConnected": true,
+      "number": "628123456789",
+      "profileName": "jakarta_store",
+      "profilePictureUrl": "https://pps.whatsapp.net/...",
+      "profilePicUrl": "https://pps.whatsapp.net/...",
+      "owner": "628123456789@s.whatsapp.net",
+      "integration": "WHATSAPP-BAILEYS",
+      "createdAt": "2026-06-13T08:00:00.000Z",
+      "updatedAt": "2026-06-13T08:00:00.000Z"
+    }
+  ]
+}
+```
+
+<Note>
+  `instanceName` is the display name shown in Wachat. Use `apiInstanceName` for API calls such as state, logout, delete, send message, and profile picture.
+</Note>
