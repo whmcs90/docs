@@ -81,7 +81,7 @@
     "/me": {
       "get": {
         "operationId": "v1.account.me",
-        "description": "Returns the authenticated account, workspace, plan, limits, and enabled features.",
+        "description": "Returns the account and workspace associated with the bearer token. Use this endpoint when your integration needs to confirm the active workspace, inspect its plan and limits, or read the feature flags available to the API key.",
         "summary": "Get current workspace",
         "tags": [
           "Account"
@@ -251,7 +251,7 @@
     "/usage": {
       "get": {
         "operationId": "v1.account.usage",
-        "description": "Returns the current billing period, message usage, remaining allowance, and wallet credits.",
+        "description": "Returns the current billing-period message usage for the authenticated workspace. Use it to show consumption, remaining allowance, reset timing, and available wallet credits before sending campaigns or high-volume messages.",
         "summary": "Get usage",
         "tags": [
           "Account"
@@ -523,7 +523,7 @@
             }
           }
         },
-        "description": "List keyword-based auto-reply rules for the workspace."
+        "description": "Lists keyword auto-reply rules configured for the workspace. Use it to display, audit, or manage the rules that answer matching inbound messages."
       },
       "post": {
         "operationId": "v1.auto-replies.store",
@@ -570,7 +570,7 @@
             "description": "Request failed."
           }
         },
-        "description": "Create a keyword-based auto-reply rule."
+        "description": "Creates a keyword auto-reply rule that responds when an inbound message matches its configured trigger. Use it for simple automated answers without creating a full flow."
       }
     },
     "/auto-replies/{id}": {
@@ -660,7 +660,7 @@
             }
           }
         },
-        "description": "Return one auto-reply rule."
+        "description": "Deletes an auto-reply rule and prevents it from responding to future matching messages."
       },
       "put": {
         "operationId": "v1.auto-replies.update",
@@ -724,7 +724,7 @@
             "description": "Request failed."
           }
         },
-        "description": "Update an auto-reply rule."
+        "description": "Updates the trigger, response, or status of an auto-reply rule."
       },
       "delete": {
         "operationId": "v1.auto-replies.destroy",
@@ -823,7 +823,7 @@
             }
           }
         },
-        "description": "Delete an auto-reply rule."
+        "description": "Deletes an auto-reply rule and prevents it from responding to future matching messages."
       }
     },
     "/broadcasts": {
@@ -963,7 +963,7 @@
             "description": "Request failed."
           }
         },
-        "description": "Send a message or template to multiple recipients."
+        "description": "Creates and dispatches a broadcast to contacts or groups using a message or approved template. Use it for one-to-many delivery when you need recipient-level status tracking."
       },
       "get": {
         "operationId": "v1.broadcasts.index",
@@ -1016,7 +1016,7 @@
             }
           }
         },
-        "description": "List recent broadcasts and their delivery status."
+        "description": "Lists recent broadcasts for the workspace. Use it to show delivery history, status, and campaign operations to workspace users."
       }
     },
     "/broadcasts/{id}": {
@@ -1097,7 +1097,7 @@
             }
           }
         },
-        "description": "Return one broadcast and its status counts."
+        "description": "Returns one broadcast with its current status and delivery counts. Use it to monitor a broadcast after dispatch or before deciding whether to stop it."
       }
     },
     "/broadcasts/{id}/recipients": {
@@ -1248,7 +1248,7 @@
             }
           }
         },
-        "description": "List delivery status for each broadcast recipient."
+        "description": "Returns per-recipient delivery information for a broadcast. Use it to identify pending, delivered, failed, or rejected recipients after a broadcast is created."
       }
     },
     "/broadcasts/{id}/stop": {
@@ -1365,7 +1365,7 @@
             }
           }
         },
-        "description": "Stop a scheduled or in-progress broadcast."
+        "description": "Stops a scheduled or in-progress broadcast when it should no longer deliver. Messages already accepted by the sender may still complete, while recipients that have not been processed are prevented from continuing."
       }
     },
     "/campaigns/statistics": {
@@ -1457,7 +1457,7 @@
             }
           }
         },
-        "description": "Return campaign delivery statistics for the workspace."
+        "description": "Returns workspace-level campaign delivery statistics. Use it to compare campaign outcomes and monitor totals across sent, delivered, failed, and pending messages."
       }
     },
     "/campaigns": {
@@ -1549,11 +1549,11 @@
             }
           }
         },
-        "description": "List campaigns for the workspace."
+        "description": "Lists campaigns for the workspace. Use it to display campaign history, status, and performance before opening an individual campaign."
       },
       "post": {
         "operationId": "v1.campaigns.store",
-        "description": "Routes through the web WaCampaignsController::store — the SINGLE real\ndispatch path. `now` campaigns fire immediately; `scheduled`/`recurring`\nare armed for the heartbeat sweeper. (The mobile-app controller only\npersists rows and never dispatches, so we deliberately don't use it.)\nThe public `schedule_type=later` maps to the web vocabulary `scheduled`,\nand recipient phone numbers ride in as `manual_numbers` — the web path\nmaterialises a workspace Contact for each, so sends are always scoped to\nthe caller's own workspace.",
+        "description": "Creates and dispatches a campaign to a defined recipient audience, immediately or on a schedule. Use campaigns for larger sends that need delivery metrics and lifecycle status.",
         "summary": "Create campaigns",
         "tags": [
           "Campaign"
@@ -1769,7 +1769,7 @@
             }
           }
         },
-        "description": "Return one campaign with delivery metrics."
+        "description": "Returns one campaign with recipient counts, status, and delivery metrics."
       },
       "delete": {
         "operationId": "v1.campaigns.destroy",
@@ -1840,7 +1840,7 @@
             }
           }
         },
-        "description": "Delete a campaign."
+        "description": "Deletes a campaign according to its current lifecycle state."
       }
     },
     "/campaigns/{id}/stop": {
@@ -1892,7 +1892,7 @@
             }
           }
         },
-        "description": "Stop a scheduled or running campaign."
+        "description": "Stops a scheduled or running campaign. Use this endpoint to halt future processing while preserving the campaign record and its existing delivery history."
       }
     },
     "/contacts": {
@@ -1957,7 +1957,7 @@
             }
           }
         },
-        "description": "List contacts, with optional search and pagination."
+        "description": "Lists contacts belonging to the authenticated workspace with pagination and optional search. Use it to build recipient pickers, synchronize a CRM, or find the contact ID required by other endpoints."
       },
       "post": {
         "operationId": "v1.contacts.store",
@@ -2004,7 +2004,7 @@
             "description": "Request failed."
           }
         },
-        "description": "Create a contact."
+        "description": "Creates a contact in the authenticated workspace. Use it to add a recipient before sending, store profile data and custom attributes, and reuse the contact in groups, broadcasts, or campaigns."
       }
     },
     "/contacts/{id}": {
@@ -2085,7 +2085,7 @@
             }
           }
         },
-        "description": "Return one contact."
+        "description": "Deletes one contact from the workspace. Use it when the recipient should no longer be available to contact, group, campaign, or CRM workflows."
       },
       "put": {
         "operationId": "v1.contacts.update",
@@ -2177,7 +2177,7 @@
             "description": "Request failed."
           }
         },
-        "description": "Update a contact."
+        "description": "Updates the supplied fields of one contact without replacing unrelated attributes. Use it to keep recipient names, numbers, tags, or custom data synchronized with your application."
       },
       "delete": {
         "operationId": "v1.contacts.destroy",
@@ -2267,7 +2267,7 @@
             }
           }
         },
-        "description": "Delete a contact."
+        "description": "Deletes one contact from the workspace. Use it when the recipient should no longer be available to contact, group, campaign, or CRM workflows."
       }
     },
     "/contact-groups": {
@@ -2312,7 +2312,7 @@
             }
           }
         },
-        "description": "List contact groups."
+        "description": "Lists contact groups and their member counts for the workspace."
       },
       "post": {
         "operationId": "v1.contact-groups.store",
@@ -2359,7 +2359,7 @@
             "description": "Request failed."
           }
         },
-        "description": "Create a contact group."
+        "description": "Creates a contact group for organizing recipients. Use groups to reuse a target audience across broadcasts and campaigns instead of sending a long recipient list on every request."
       }
     },
     "/contact-groups/{id}": {
@@ -2451,7 +2451,7 @@
             }
           }
         },
-        "description": "Delete a contact group."
+        "description": "Deletes a contact group and detaches its membership links. Contacts themselves are not deleted by this operation."
       }
     },
     "/conversations": {
@@ -2561,7 +2561,7 @@
             }
           }
         },
-        "description": "List recent conversations."
+        "description": "Lists recent WhatsApp conversations for the workspace. Use it to build an inbox or locate a conversation ID before requesting its messages."
       }
     },
     "/conversations/{id}/messages": {
@@ -2669,7 +2669,7 @@
             }
           }
         },
-        "description": "List messages in a conversation."
+        "description": "Lists the messages belonging to one conversation, ordered for conversation history and support workflows. Use the conversation ID returned by the conversations endpoint to load a thread into your application."
       }
     },
     "/deals": {
@@ -2691,7 +2691,7 @@
             }
           }
         },
-        "description": "List deals, with optional pipeline filters."
+        "description": "Lists CRM deals with optional pipeline, stage, and status filters. Use it to build sales views and retrieve opportunities for follow-up automation."
       },
       "post": {
         "operationId": "v1.deals.store",
@@ -2780,7 +2780,7 @@
             "description": "Request failed."
           }
         },
-        "description": "Create a deal."
+        "description": "Creates a CRM deal associated with the workspace. Use it to represent an opportunity and track its pipeline, stage, value, status, and contact relationship."
       }
     },
     "/deals/{id}": {
@@ -2812,7 +2812,7 @@
             }
           }
         },
-        "description": "Return one deal."
+        "description": "Returns one CRM deal with its pipeline and contact information."
       },
       "put": {
         "operationId": "v1.deals.update",
@@ -2908,7 +2908,7 @@
             "description": "Request failed."
           }
         },
-        "description": "Update a deal."
+        "description": "Updates a CRM deal, including its stage and status. Use it to advance an opportunity as conversations and sales activity progress."
       },
       "delete": {
         "operationId": "v1.deals.destroy",
@@ -2938,7 +2938,7 @@
             }
           }
         },
-        "description": "Delete a deal."
+        "description": "Deletes a CRM deal from the workspace."
       }
     },
     "/devices": {
@@ -2981,7 +2981,7 @@
             }
           }
         },
-        "description": "List connected WhatsApp devices and channels."
+        "description": "Lists the WhatsApp devices and provider channels owned by the workspace. Use it to select a sender, inspect connection status, and obtain device IDs for message requests."
       }
     },
     "/devices/create": {
@@ -3344,7 +3344,7 @@
             }
           }
         },
-        "description": "Create a device and start pairing."
+        "description": "Creates a WhatsApp device for the authenticated workspace and starts the pairing process. The response includes the initial device information and QR data when available; scan it with WhatsApp to finish connecting the sender."
       }
     },
     "/devices/{id}/qr": {
@@ -3525,7 +3525,7 @@
             }
           }
         },
-        "description": "Return the current pairing QR code."
+        "description": "Returns or refreshes the QR code for a device that is waiting for WhatsApp pairing. Use the response to render the QR code in your integration and poll the device status until pairing is complete."
       }
     },
     "/devices/{id}": {
@@ -3606,7 +3606,7 @@
             }
           }
         },
-        "description": "Return one device."
+        "description": "Returns one connected device and its current connection state."
       },
       "delete": {
         "operationId": "v1.devices.destroy",
@@ -3795,7 +3795,7 @@
             }
           }
         },
-        "description": "Remove a device and its message data."
+        "description": "Permanently removes a connected device and its associated sender data. Use it when a WhatsApp number should no longer send from this workspace."
       }
     },
     "/flows": {
@@ -3841,7 +3841,7 @@
             }
           }
         },
-        "description": "List automation flows."
+        "description": "Lists automation flows available to the workspace. Use it to let your application select a flow for contact enrollment and lifecycle automation."
       }
     },
     "/flows/{id}": {
@@ -3922,7 +3922,7 @@
             }
           }
         },
-        "description": "Return one automation flow."
+        "description": "Returns one automation flow and its configuration. Use it to inspect the flow before enrolling contacts or displaying its status in an automation dashboard."
       }
     },
     "/flows/{id}/enroll": {
@@ -4072,7 +4072,7 @@
             "description": "Request failed."
           }
         },
-        "description": "Enroll a contact in an automation flow."
+        "description": "Enrolls a contact into an automation flow using a contact ID or phone number. Enrollment is idempotent, so retrying the same request does not create duplicate subscriptions."
       }
     },
     "/flows/{id}/subscribers": {
@@ -4192,7 +4192,7 @@
             }
           }
         },
-        "description": "List contacts enrolled in a flow."
+        "description": "Lists the contacts enrolled in an automation flow together with their current subscription state. Use it to monitor who entered a flow and to build operational dashboards."
       }
     },
     "/media": {
@@ -4282,7 +4282,7 @@
             "description": "Request failed."
           }
         },
-        "description": "Upload media and return a hosted URL."
+        "description": "Uploads a media file and returns a hosted URL that can be reused in message and template requests. Use this endpoint when the file is not already publicly accessible; keep the returned URL available until the message has been processed."
       }
     },
     "/messages": {
@@ -4366,7 +4366,7 @@
             "description": "Request failed."
           }
         },
-        "description": "Send one WhatsApp message."
+        "description": "Sends one WhatsApp message through a connected workspace device. Use it for text, media, location, and supported interactive message types; the request can select a sender or use the workspace default."
       },
       "get": {
         "operationId": "v1.messages.index",
@@ -4410,7 +4410,7 @@
             }
           }
         },
-        "description": "List recent messages."
+        "description": "Lists recent messages for the workspace. Use it for message history, delivery reconciliation, and support views; filter and pagination options are described by the request parameters."
       }
     },
     "/messages/{id}": {
@@ -4491,7 +4491,7 @@
             }
           }
         },
-        "description": "Return delivery status for one message."
+        "description": "Returns the delivery status and metadata for one message. Use the message ID from the send response to reconcile queued, sent, delivered, read, or failed states."
       }
     },
     "/reseller/workspaces": {
@@ -4564,7 +4564,7 @@
             }
           }
         },
-        "description": "List reseller workspaces."
+        "description": "Lists the isolated reseller workspaces owned by the authenticated primary workspace. Use it to display reseller accounts and track the workspaces managed through the reseller API."
       },
       "post": {
         "operationId": "resellerWorkspace.store",
@@ -4728,7 +4728,7 @@
             "description": "Request failed."
           }
         },
-        "description": "Create a reseller workspace."
+        "description": "Creates an isolated reseller workspace and returns its initial workspace key. Use it when provisioning a new customer environment; the generated key must be stored securely because it is returned only once."
       }
     },
     "/reseller/workspaces/{id}/api-key": {
@@ -4927,7 +4927,7 @@
             "description": "Request failed."
           }
         },
-        "description": "Issue a reseller workspace API key."
+        "description": "Issues a replacement operational API key for a reseller workspace. Revoke the existing active key first, then store the returned key securely because it is shown only when issued."
       },
       "delete": {
         "operationId": "resellerWorkspace.revokeKey",
@@ -5017,7 +5017,7 @@
             }
           }
         },
-        "description": "Revoke a reseller workspace API key."
+        "description": "Revokes the active operational API key for a reseller workspace. Use it immediately when a key is exposed or when access for that reseller must be stopped."
       }
     },
     "/scheduled": {
@@ -5102,7 +5102,7 @@
             "description": "Request failed."
           }
         },
-        "description": "Schedule a future message."
+        "description": "Schedules a WhatsApp message, template, or flow send for a future time. Use the request timezone and send timestamp to control delivery timing; the response identifies the scheduled job for later tracking or cancellation."
       },
       "get": {
         "operationId": "v1.scheduled.index",
@@ -5146,7 +5146,7 @@
             }
           }
         },
-        "description": "List scheduled messages."
+        "description": "Lists upcoming and recent scheduled messages for the workspace. Use it to build a schedule view or find the ID needed to inspect or cancel a pending send."
       }
     },
     "/scheduled/{id}": {
@@ -5227,7 +5227,7 @@
             }
           }
         },
-        "description": "Return one scheduled message."
+        "description": "Returns one scheduled message and its current processing state. Use it to confirm the planned content, recipient set, send time, and whether the job has already been processed."
       },
       "delete": {
         "operationId": "v1.scheduled.destroy",
@@ -5342,7 +5342,7 @@
             }
           }
         },
-        "description": "Cancel a scheduled message."
+        "description": "Cancels a future scheduled message before it is processed. Use the scheduled message ID returned when the job was created."
       }
     },
     "/templates": {
@@ -5434,7 +5434,7 @@
             }
           }
         },
-        "description": "List WhatsApp templates."
+        "description": "Lists WhatsApp templates available to the workspace. Use it to select approved templates for individual sends, broadcasts, and campaigns."
       },
       "post": {
         "operationId": "v1.templates.store",
@@ -5481,7 +5481,7 @@
             "description": "Request failed."
           }
         },
-        "description": "Create a WhatsApp template."
+        "description": "Creates a WhatsApp template submission with its body, variables, category, and optional header or buttons. Use it when you need a reusable message that can be submitted for Meta approval."
       }
     },
     "/templates/categories": {
@@ -5528,7 +5528,7 @@
             }
           }
         },
-        "description": "List available template categories."
+        "description": "Returns the Meta template categories accepted when creating or updating a WhatsApp template. Use this list to validate the category value before submitting a template for approval."
       }
     },
     "/templates/{id}/send": {
@@ -5833,7 +5833,7 @@
             "description": "Request failed."
           }
         },
-        "description": "Send one approved template to a recipient."
+        "description": "Sends one approved WhatsApp template to a single recipient with the variable values supplied by your application. Use this endpoint for transactional or campaign messages that must follow a Meta-approved template, including optional header media and button values."
       }
     },
     "/templates/{id}": {
@@ -5923,7 +5923,7 @@
             }
           }
         },
-        "description": "Return one WhatsApp template."
+        "description": "Deletes a WhatsApp template from the workspace."
       },
       "put": {
         "operationId": "v1.templates.update",
@@ -5987,7 +5987,7 @@
             "description": "Request failed."
           }
         },
-        "description": "Update a WhatsApp template."
+        "description": "Updates a WhatsApp template and its editable content."
       },
       "delete": {
         "operationId": "v1.templates.destroy",
@@ -6096,7 +6096,7 @@
             }
           }
         },
-        "description": "Delete a WhatsApp template."
+        "description": "Deletes a WhatsApp template from the workspace."
       }
     },
     "/webhooks": {
@@ -6146,7 +6146,7 @@
             }
           }
         },
-        "description": "List registered webhooks."
+        "description": "Lists the outbound webhook endpoints registered for the workspace. Use it to inspect active URLs, subscribed events, enabled status, and the webhook IDs used for updates or deletion."
       },
       "post": {
         "operationId": "v1.webhooks.store",
@@ -6193,7 +6193,7 @@
             "description": "Request failed."
           }
         },
-        "description": "Register a webhook endpoint."
+        "description": "Registers an outbound webhook endpoint for the workspace. Wachat sends subscribed message, delivery, contact, device, broadcast, and campaign events to the URL; use a signing secret to verify that deliveries came from Wachat."
       }
     },
     "/webhooks/{id}": {
@@ -6285,7 +6285,7 @@
             }
           }
         },
-        "description": "Remove a webhook endpoint."
+        "description": "Removes a registered webhook endpoint and stops future event deliveries to it. Use the webhook ID returned by the list or create operation."
       }
     }
   },
