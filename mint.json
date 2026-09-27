@@ -52,14 +52,13 @@
       ]
     },
     {
-      "group": "Devices & Media",
+      "group": "Devices",
       "pages": [
         "openapi.json GET /devices",
         "openapi.json POST /devices/create",
         "openapi.json GET /devices/{id}/qr",
         "openapi.json GET /devices/{id}",
-        "openapi.json DELETE /devices/{id}",
-        "openapi.json POST /media"
+        "openapi.json DELETE /devices/{id}"
       ]
     },
     {
