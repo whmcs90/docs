@@ -35,6 +35,12 @@
     }
   },
   "openapi": "openapi.json",
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/introduction"
+    }
+  ],
   "navigation": [
     {
       "group": "Start here",
