@@ -30,11 +30,10 @@
     "auth": {
       "method": "bearer"
     },
-  "playground": {
+    "playground": {
       "display": "interactive"
     }
   },
-  "openapi": "https://crm.wachat.net/docs/api.json",
   "navigation": [
     {
       "group": "Start here",
@@ -53,66 +52,9 @@
     },
     {
       "group": "API Reference",
+      "openapi": "https://crm.wachat.net/docs/api.json",
       "pages": [
         "api-reference/introduction"
-      ]
-    },
-    {
-      "group": "Account",
-      "pages": [
-        "api-reference/account-limits"
-      ]
-    },
-    {
-      "group": "Messages",
-      "pages": [
-        "api-reference/send-text",
-        "api-reference/send-media",
-        "api-reference/send-button",
-        "api-reference/send-carousel",
-        "api-reference/send-cta",
-        "api-reference/send-list",
-        "api-reference/send-group",
-        "api-reference/send-location",
-        "api-reference/send-poll"
-      ]
-    },
-    {
-      "group": "Instances",
-      "pages": [
-        "api-reference/instance-create",
-        "api-reference/instance-qr-image",
-        "api-reference/instance-state",
-        "api-reference/instance-profile-picture",
-		"api-reference/instance-list",
-        "api-reference/instance-logout",
-        "api-reference/instance-delete"
-      ]
-    },
-	{
-      "group": "Groups",
-      "pages": [
-        "api-reference/groups"
-      ]
-    },
-    {
-      "group": "Contacts",
-      "pages": [
-        "api-reference/contacts"
-      ]
-    },
-	{
-      "group": "Numbers",
-      "pages": [
-        "api-reference/check-number"
-      ]
-    },
-    {
-      "group": "Webhooks",
-      "pages": [
-        "api-reference/webhooks",
-        "api-reference/webhooks-create",
-        "api-reference/webhooks-delete"
       ]
     }
   ]
