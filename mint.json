@@ -37,12 +37,6 @@
   "openapi": "openapi.json",
   "navigation": [
     {
-      "group": "Start here",
-      "pages": [
-        "introduction"
-      ]
-    },
-    {
       "group": "Guides",
       "pages": [
         "guides/authentication",
