@@ -3,14 +3,15 @@ title: 'Introduction'
 description: 'Learn how to authenticate and start building with the Wachat API'
 ---
 
-Welcome to the Wachat API! Our REST API allows you to programmatically send messages, manage your WhatsApp instances, and integrate Wachat directly into your own applications.
-<CodeGroup>
-Authorization: Bearer YOUR_SECRET_TOKEN
-</CodeGroup>
-And
-<CodeGroup>
-instanceName: "my-instance-01"
-</CodeGroup>
+Welcome to the Wachat API. Use it to send messages, manage connected WhatsApp devices, work with contacts and templates, and receive webhook events from your workspace.
+
+Authenticate every request with your workspace API token:
+
+```http
+Authorization: Bearer YOUR_API_TOKEN
+```
+
+For message requests, use the `device_id` returned by `GET /devices`.
 ## Base URL
 
 All API requests should be made to the following base URL:

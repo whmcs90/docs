@@ -1,12 +1,12 @@
 ---
 title: 'Build on Wachat'
-description: 'Send WhatsApp messages, manage instances, and receive webhooks through one clear API.'
+description: 'Send WhatsApp messages, manage devices, and receive webhooks through one clear API.'
 mode: 'wide'
 ---
 
 <Hero
   title="WhatsApp infrastructure for developers"
-  description="Connect your application to Wachat, send rich WhatsApp messages, and operate your instances with a production-ready REST API."
+  description="Connect your application to Wachat, send WhatsApp messages, and manage connected devices with a production-ready REST API."
   primaryCta={{label: "Read the quickstart", url: "/guides/quickstart"}}
   secondaryCta={{label: "Explore the API", url: "/api-reference/introduction"}}
 />
@@ -26,20 +26,20 @@ mode: 'wide'
 ## What you can build
 
 <CardGroup cols={2}>
-  <Card title="Send rich messages" icon="message-circle" href="/api-reference/send-text">
-    Text, media, buttons, lists, carousels, polls, and location messages.
+  <Card title="Send messages" icon="message-circle" href="/guides/quickstart">
+    Send text, media, buttons, lists, carousels, polls, and location messages.
   </Card>
-  <Card title="Control instances" icon="qr-code" href="/api-reference/instance-state">
-    Create instances, inspect connection state, and manage QR authentication.
+  <Card title="Manage devices" icon="qr-code" href="/guides/quickstart">
+    Create devices, inspect connection status, and complete QR pairing.
   </Card>
-  <Card title="Manage contacts and groups" icon="users" href="/api-reference/contacts">
+  <Card title="Manage contacts and groups" icon="users" href="/guides/quickstart">
     Check numbers and work with WhatsApp contacts and groups.
   </Card>
-  <Card title="Know your limits" icon="gauge" href="/api-reference/account-limits">
-    Read plan, quota, subscription, and feature information.
+  <Card title="Use templates and webhooks" icon="webhook" href="/guides/webhooks">
+    Send approved templates and receive message, delivery, and campaign events.
   </Card>
 </CardGroup>
 
-<Warning>Keep your API token server-side. It grants access to your WhatsApp instances and messaging quota.</Warning>
+<Warning>Keep your API token server-side. It grants access to your WhatsApp devices, messages, and workspace data.</Warning>
 
 <Tip>Every endpoint includes a live Try It playground with generated request examples.</Tip>
