@@ -1,116 +1,45 @@
 ---
-title: 'Wachat Documentation'
-description: 'The complete guide to integrating WhatsApp messaging into your application.'
+title: 'Build on Wachat'
+description: 'Send WhatsApp messages, manage instances, and receive webhooks through one clear API.'
 mode: 'wide'
 ---
 
-Welcome to the official Wachat developer documentation. Whether you are building an automated customer support bot, sending notifications, or managing group chats, our API provides the tools you need to build powerful communication flows.
+<Hero
+  title="WhatsApp infrastructure for developers"
+  description="Connect your application to Wachat, send rich WhatsApp messages, and operate your instances with a production-ready REST API."
+  primaryCta={{label: "Read the quickstart", url: "/guides/quickstart"}}
+  secondaryCta={{label: "Explore the API", url: "/api-reference/introduction"}}
+/>
 
-## 🔐 Authentication
-
-All API requests to Wachat must be authenticated using a secret token. This token identifies your team and ensures your requests are linked to your specific subscription plan and instances.
-
-### API Token
-To interact with our endpoints, you must include your API Token in the HTTP header of every request.
-<Warning>
-Keep your token secret! Your API Token carries full access to your WhatsApp instances and messaging quota. Never share it in public repositories (like GitHub) or client-side code that can be inspected by users.
-</Warning>
-
-## Getting Started
-
-Explore our guides and API reference to start sending messages in minutes.
-
-<Tip>
-💡 Pro Tip: Testing from these Docs
-
-You can use the "Try It" feature on the right side of any API endpoint in this documentation! Simply paste your token into the authentication field once, and it will be remembered as you navigate through different endpoints.
-</Tip>
-
-<CardGroup cols={2}>
-  <Card
-    title="Quick Start Guide"
-    icon="play"
-    href="/api-reference/introduction"
-  >
-    Learn how to authenticate and make your very first API request.
+<CardGroup cols={3}>
+  <Card title="Quickstart" icon="play" href="/guides/quickstart">
+    Make your first authenticated request in a few minutes.
   </Card>
-  <Card
-    title="Send Text Message"
-    icon="message"
-    href="/api-reference/send-text"
-  >
-    Send simple WhatsApp text messages with optional typing delay simulation.
+  <Card title="Authentication" icon="lock" href="/guides/authentication">
+    Learn how to create, store, and send your API token safely.
   </Card>
-
-  <Card
-    title="Send Media Message"
-    icon="paperclip"
-    href="/api-reference/send-media"
-  >
-    Send images, videos, documents, and audio messages with captions.
-  </Card>
-
-  {/* ✅ PERBAIKAN REPLAY BUTTON: Menggunakan 'square-plus' atau 'pointer' */}
-  <Card
-    title="Send Buttons"
-    icon="check-square"
-    href="/api-reference/send-button"
-  >
-    Create interactive quick reply button experiences.
-  </Card>
-
-  {/* ✅ PERBAIKAN CTA BUTTONS: Menggunakan 'link' atau 'bolt' (aksi cepat) */}
-  <Card
-    title="Send CTA Buttons"
-    icon="link"
-  	href="/api-reference/send-cta"
-  >
-    Send actionable URL and call buttons directly inside WhatsApp.
-  </Card>
-
-  <Card
-    title="Send Carousel"
-    icon="images"
-    href="/api-reference/send-carousel"
-  >
-    Deliver multi-card carousel interactions with embedded actions.
-  </Card>
-
-  {/* ✅ PERBAIKAN LIST MENU: Menggunakan 'list' atau 'bars' murni */}
-  <Card
-    title="Send List Menu"
-    icon="list"
-    href="/api-reference/send-list"
-  >
-    Build expandable WhatsApp list menu experiences.
-  </Card>
-  
-  <Card
-    title="Manage Instances"
-    icon="qrcode"
-    href="/api-reference/instance-state"
-  >
-    Connect devices, check connection status, and generate QR codes.
-  </Card>
-  
-  
-</CardGroup>
-
-## Advanced Features
-
-<CardGroup cols={2}>
-  <Card
-    title="Group Management"
-    icon="users-gear"
-    href="/api-reference/groups"
-  >
-    Fetch group lists and send messages directly to WhatsApp groups.
-  </Card>
-  <Card
-    title="Webhooks"
-    icon="brackets-curly"
-    href="/api-reference/introduction#webhooks"
-  >
-    Receive real-time updates on your server for incoming messages.
+  <Card title="Webhooks" icon="brackets-curly" href="/guides/webhooks">
+    Receive incoming messages and delivery events in real time.
   </Card>
 </CardGroup>
+
+## What you can build
+
+<CardGroup cols={2}>
+  <Card title="Send rich messages" icon="message-circle" href="/api-reference/send-text">
+    Text, media, buttons, lists, carousels, polls, and location messages.
+  </Card>
+  <Card title="Control instances" icon="qr-code" href="/api-reference/instance-state">
+    Create instances, inspect connection state, and manage QR authentication.
+  </Card>
+  <Card title="Manage contacts and groups" icon="users" href="/api-reference/contacts">
+    Check numbers and work with WhatsApp contacts and groups.
+  </Card>
+  <Card title="Know your limits" icon="gauge" href="/api-reference/account-limits">
+    Read plan, quota, subscription, and feature information.
+  </Card>
+</CardGroup>
+
+<Warning>Keep your API token server-side. It grants access to your WhatsApp instances and messaging quota.</Warning>
+
+<Tip>Every endpoint includes a live Try It playground with generated request examples.</Tip>

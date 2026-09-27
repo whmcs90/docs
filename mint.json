@@ -37,9 +37,18 @@
   "openapi": "openapi.yaml",
   "navigation": [
     {
-      "group": "Welcome",
+      "group": "Start here",
       "pages": [
-        "index"
+        "index",
+        "introduction"
+      ]
+    },
+    {
+      "group": "Guides",
+      "pages": [
+        "guides/authentication",
+        "guides/quickstart",
+        "guides/webhooks"
       ]
     },
     {

@@ -1,0 +1,35 @@
+---
+title: 'Quickstart'
+description: 'Make your first Wachat API request.'
+---
+
+## 1. Set your token
+
+```bash
+export WACHAT_API_TOKEN="your_token_here"
+```
+
+## 2. Check your account
+
+```bash
+curl https://app.wachat.net/api/v1/account/limits \
+  -H "Authorization: Bearer $WACHAT_API_TOKEN" \
+  -H "Accept: application/json"
+```
+
+## 3. Send a message
+
+Once an instance is connected, call the send text endpoint:
+
+```bash
+curl -X POST https://app.wachat.net/api/v1/send/text \
+  -H "Authorization: Bearer $WACHAT_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "instance_id": "YOUR_INSTANCE_ID",
+    "to": "628123456789",
+    "message": "Hello from Wachat"
+  }'
+```
+
+<Tip>Use the API Reference playground to inspect the exact request body accepted by each endpoint.</Tip>

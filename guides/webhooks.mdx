@@ -1,0 +1,20 @@
+---
+title: 'Webhooks'
+description: 'Receive real-time WhatsApp events in your application.'
+---
+
+Webhooks let Wachat notify your server when a message or instance event occurs. Create and manage subscriptions with the [webhook endpoints](/api-reference/webhooks).
+
+## Endpoint requirements
+
+Your webhook URL must be publicly reachable over HTTPS and should return a successful `2xx` response quickly. Process heavier work asynchronously after acknowledging the request.
+
+## Security checklist
+
+- Use HTTPS.
+- Verify the event signature when one is provided.
+- Reject unknown event types safely.
+- Store the event ID and make processing idempotent.
+- Return `2xx` only after the payload has been accepted.
+
+Webhook delivery can be retried when your endpoint is unavailable or returns an error. Do not assume every delivery is unique.

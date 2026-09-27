@@ -1,0 +1,22 @@
+---
+title: 'Authentication'
+description: 'Authenticate every Wachat API request with a bearer token.'
+---
+
+All Wachat API requests use a bearer token. Send the token in the `Authorization` header.
+
+```bash
+curl https://app.wachat.net/api/v1/account/limits \
+  -H "Authorization: Bearer YOUR_API_TOKEN" \
+  -H "Accept: application/json"
+```
+
+<Warning>Never expose your token in browser JavaScript, mobile client code, public repositories, or logs.</Warning>
+
+## Base URL
+
+```text
+https://app.wachat.net/api/v1
+```
+
+Store the token in a server-side environment variable or secret manager and rotate it immediately if exposed.
