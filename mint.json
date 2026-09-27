@@ -34,7 +34,7 @@
       "display": "interactive"
     }
   },
-  "openapi": "openapi.yaml",
+  "openapi": "https://crm.wachat.net/docs/api.json",
   "navigation": [
     {
       "group": "Start here",
