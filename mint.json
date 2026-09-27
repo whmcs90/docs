@@ -13,7 +13,7 @@
   },
   "topbarCtaButton": {
     "name": "Dashboard",
-    "url": "https://app.wachat.net"
+    "url": "https://crm.wachat.net"
   },
   "topbarLinks": [
     {
@@ -26,7 +26,7 @@
     }
   ],
   "api": {
-    "baseUrl": "https://app.wachat.net/api/v1",
+    "baseUrl": "https://crm.wachat.net/api/v1",
     "auth": {
       "method": "bearer"
     },

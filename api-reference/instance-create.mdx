@@ -26,14 +26,14 @@ Use the `qrcode.base64` value as an image source in your application.
 You can also use `qrcode.imageUrl` to render the QR code through an image endpoint:
 
 ```html
-<img src="https://app.wachat.net/api/v1/instance/qr/image?instanceName=t1_mq9r2jov_store-jakarta&apiKey=YOUR_API_KEY" alt="WhatsApp QR Code" />
+<img src="https://crm.wachat.net/api/v1/instance/qr/image?instanceName=t1_mq9r2jov_store-jakarta&apiKey=YOUR_API_KEY" alt="WhatsApp QR Code" />
 ```
 
 For an auto-updating QR display that changes to a success message after the user scans it, use `qrcode.liveUrl`:
 
 ```html
 <iframe
-  src="https://app.wachat.net/api/v1/instance/qr/live?instanceName=t1_mq9r2jov_store-jakarta&apiKey=YOUR_API_KEY"
+  src="https://crm.wachat.net/api/v1/instance/qr/live?instanceName=t1_mq9r2jov_store-jakarta&apiKey=YOUR_API_KEY"
   width="420"
   height="460"
 ></iframe>
@@ -46,7 +46,7 @@ If the QR code expires, request a fresh QR code using `GET /instance/qr`.
 If you want the create request to return the QR code as an image instead of JSON, add `response=image` to the URL:
 
 ```bash
-curl -X POST "https://app.wachat.net/api/v1/instance/create?response=image" \
+curl -X POST "https://crm.wachat.net/api/v1/instance/create?response=image" \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{

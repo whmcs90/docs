@@ -12,7 +12,7 @@ export WACHAT_API_TOKEN="your_token_here"
 ## 2. Check your account
 
 ```bash
-curl https://app.wachat.net/api/v1/account/limits \
+curl https://crm.wachat.net/api/v1/account/limits \
   -H "Authorization: Bearer $WACHAT_API_TOKEN" \
   -H "Accept: application/json"
 ```
@@ -22,7 +22,7 @@ curl https://app.wachat.net/api/v1/account/limits \
 Once an instance is connected, call the send text endpoint:
 
 ```bash
-curl -X POST https://app.wachat.net/api/v1/send/text \
+curl -X POST https://crm.wachat.net/api/v1/send/text \
   -H "Authorization: Bearer $WACHAT_API_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{

@@ -9,7 +9,7 @@ info:
   version: 1.0.0
 
 servers:
-  - url: https://app.wachat.net/api/v1
+  - url: https://crm.wachat.net/api/v1
     description: Live Production Gateway
 
 security:
@@ -1512,13 +1512,13 @@ paths:
                         type: string
                         nullable: true
                         description: URL that returns the QR code directly as an image. Add apiKey as a query parameter when using it inside an img tag.
-                        example: https://app.wachat.net/api/v1/instance/qr/image?instanceName=t1_mq9r2jov_jakarta_store
+                        example: https://crm.wachat.net/api/v1/instance/qr/image?instanceName=t1_mq9r2jov_jakarta_store
 
                       liveUrl:
                         type: string
                         nullable: true
                         description: URL that returns a live HTML QR page. Add apiKey as a query parameter when using it inside an iframe.
-                        example: https://app.wachat.net/api/v1/instance/qr/live?instanceName=t1_mq9r2jov_jakarta_store
+                        example: https://crm.wachat.net/api/v1/instance/qr/live?instanceName=t1_mq9r2jov_jakarta_store
 
                       count:
                         type: integer
