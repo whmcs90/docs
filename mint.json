@@ -52,15 +52,55 @@
       ]
     },
     {
-      "group": "API Reference",
+      "group": "Account",
       "pages": [
         "openapi.json GET /me",
-        "openapi.json GET /usage",
-        "openapi.json GET /auto-replies",
-        "openapi.json POST /auto-replies",
-        "openapi.json GET /auto-replies/{id}",
-        "openapi.json PUT /auto-replies/{id}",
-        "openapi.json DELETE /auto-replies/{id}",
+        "openapi.json GET /usage"
+      ]
+    },
+    {
+      "group": "Messaging",
+      "pages": [
+        "openapi.json GET /conversations",
+        "openapi.json GET /conversations/{id}/messages",
+        "openapi.json GET /messages",
+        "openapi.json POST /messages",
+        "openapi.json GET /messages/{id}"
+      ]
+    },
+    {
+      "group": "Templates",
+      "pages": [
+        "openapi.json GET /templates",
+        "openapi.json POST /templates",
+        "openapi.json GET /templates/categories",
+        "openapi.json POST /templates/{id}/send",
+        "openapi.json GET /templates/{id}",
+        "openapi.json PUT /templates/{id}",
+        "openapi.json DELETE /templates/{id}"
+      ]
+    },
+    {
+      "group": "Contacts & CRM",
+      "pages": [
+        "openapi.json GET /contacts",
+        "openapi.json POST /contacts",
+        "openapi.json GET /contacts/{id}",
+        "openapi.json PUT /contacts/{id}",
+        "openapi.json DELETE /contacts/{id}",
+        "openapi.json GET /contact-groups",
+        "openapi.json POST /contact-groups",
+        "openapi.json DELETE /contact-groups/{id}",
+        "openapi.json GET /deals",
+        "openapi.json POST /deals",
+        "openapi.json GET /deals/{id}",
+        "openapi.json PUT /deals/{id}",
+        "openapi.json DELETE /deals/{id}"
+      ]
+    },
+    {
+      "group": "Campaigns & Broadcasts",
+      "pages": [
         "openapi.json GET /broadcasts",
         "openapi.json POST /broadcasts",
         "openapi.json GET /broadcasts/{id}",
@@ -71,53 +111,58 @@
         "openapi.json POST /campaigns",
         "openapi.json GET /campaigns/{id}",
         "openapi.json DELETE /campaigns/{id}",
-        "openapi.json POST /campaigns/{id}/stop",
-        "openapi.json GET /contacts",
-        "openapi.json POST /contacts",
-        "openapi.json GET /contacts/{id}",
-        "openapi.json PUT /contacts/{id}",
-        "openapi.json DELETE /contacts/{id}",
-        "openapi.json GET /contact-groups",
-        "openapi.json POST /contact-groups",
-        "openapi.json DELETE /contact-groups/{id}",
-        "openapi.json GET /conversations",
-        "openapi.json GET /conversations/{id}/messages",
-        "openapi.json GET /deals",
-        "openapi.json POST /deals",
-        "openapi.json GET /deals/{id}",
-        "openapi.json PUT /deals/{id}",
-        "openapi.json DELETE /deals/{id}",
+        "openapi.json POST /campaigns/{id}/stop"
+      ]
+    },
+    {
+      "group": "Automation",
+      "pages": [
+        "openapi.json GET /auto-replies",
+        "openapi.json POST /auto-replies",
+        "openapi.json GET /auto-replies/{id}",
+        "openapi.json PUT /auto-replies/{id}",
+        "openapi.json DELETE /auto-replies/{id}",
+        "openapi.json GET /flows",
+        "openapi.json GET /flows/{id}",
+        "openapi.json POST /flows/{id}/enroll",
+        "openapi.json GET /flows/{id}/subscribers"
+      ]
+    },
+    {
+      "group": "Devices & Media",
+      "pages": [
         "openapi.json GET /devices",
         "openapi.json POST /devices/create",
         "openapi.json GET /devices/{id}/qr",
         "openapi.json GET /devices/{id}",
         "openapi.json DELETE /devices/{id}",
-        "openapi.json GET /flows",
-        "openapi.json GET /flows/{id}",
-        "openapi.json POST /flows/{id}/enroll",
-        "openapi.json GET /flows/{id}/subscribers",
-        "openapi.json POST /media",
-        "openapi.json GET /messages",
-        "openapi.json POST /messages",
-        "openapi.json GET /messages/{id}",
-        "openapi.json GET /reseller/workspaces",
-        "openapi.json POST /reseller/workspaces",
-        "openapi.json POST /reseller/workspaces/{id}/api-key",
-        "openapi.json DELETE /reseller/workspaces/{id}/api-key",
+        "openapi.json POST /media"
+      ]
+    },
+    {
+      "group": "Scheduling",
+      "pages": [
         "openapi.json GET /scheduled",
         "openapi.json POST /scheduled",
         "openapi.json GET /scheduled/{id}",
-        "openapi.json DELETE /scheduled/{id}",
-        "openapi.json GET /templates",
-        "openapi.json POST /templates",
-        "openapi.json GET /templates/categories",
-        "openapi.json POST /templates/{id}/send",
-        "openapi.json GET /templates/{id}",
-        "openapi.json PUT /templates/{id}",
-        "openapi.json DELETE /templates/{id}",
+        "openapi.json DELETE /scheduled/{id}"
+      ]
+    },
+    {
+      "group": "Webhooks",
+      "pages": [
         "openapi.json GET /webhooks",
         "openapi.json POST /webhooks",
         "openapi.json DELETE /webhooks/{id}"
+      ]
+    },
+    {
+      "group": "Reseller",
+      "pages": [
+        "openapi.json GET /reseller/workspaces",
+        "openapi.json POST /reseller/workspaces",
+        "openapi.json POST /reseller/workspaces/{id}/api-key",
+        "openapi.json DELETE /reseller/workspaces/{id}/api-key"
       ]
     }
   ]
