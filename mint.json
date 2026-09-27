@@ -52,6 +52,17 @@
       ]
     },
     {
+      "group": "Devices & Media",
+      "pages": [
+        "openapi.json GET /devices",
+        "openapi.json POST /devices/create",
+        "openapi.json GET /devices/{id}/qr",
+        "openapi.json GET /devices/{id}",
+        "openapi.json DELETE /devices/{id}",
+        "openapi.json POST /media"
+      ]
+    },
+    {
       "group": "Messaging",
       "pages": [
         "openapi.json GET /conversations",
@@ -119,17 +130,6 @@
         "openapi.json GET /flows/{id}",
         "openapi.json POST /flows/{id}/enroll",
         "openapi.json GET /flows/{id}/subscribers"
-      ]
-    },
-    {
-      "group": "Devices & Media",
-      "pages": [
-        "openapi.json GET /devices",
-        "openapi.json POST /devices/create",
-        "openapi.json GET /devices/{id}/qr",
-        "openapi.json GET /devices/{id}",
-        "openapi.json DELETE /devices/{id}",
-        "openapi.json POST /media"
       ]
     },
     {
