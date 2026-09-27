@@ -12,24 +12,32 @@ export WACHAT_API_TOKEN="your_token_here"
 ## 2. Check your account
 
 ```bash
-curl https://crm.wachat.net/api/v1/account/limits \
+curl https://crm.wachat.net/api/v1/me \
   -H "Authorization: Bearer $WACHAT_API_TOKEN" \
   -H "Accept: application/json"
 ```
 
-## 3. Send a message
+## 3. Check connected devices
 
-Once an instance is connected, call the send text endpoint:
+Before sending a message, confirm that your WhatsApp device is connected:
 
 ```bash
-curl -X POST https://crm.wachat.net/api/v1/send/text \
+curl https://crm.wachat.net/api/v1/devices \
   -H "Authorization: Bearer $WACHAT_API_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "instance_id": "YOUR_INSTANCE_ID",
-    "to": "628123456789",
-    "message": "Hello from Wachat"
-  }'
+  -H "Accept: application/json"
+```
+
+## 4. Send a message
+
+Use the `device_id` returned by the devices endpoint. The messages endpoint accepts multipart form data:
+
+```bash
+curl -X POST https://crm.wachat.net/api/v1/messages \
+  -H "Authorization: Bearer $WACHAT_API_TOKEN" \
+  -F "device_id=YOUR_DEVICE_ID" \
+  -F "to=628123456789" \
+  -F "type=text" \
+  -F "message=Hello from Wachat"
 ```
 
 <Tip>Use the API Reference playground to inspect the exact request body accepted by each endpoint.</Tip>
