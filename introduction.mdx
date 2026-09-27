@@ -1,9 +1,76 @@
 ---
 title: 'Introduction'
-description: 'Learn how to authenticate and start building with the Wachat API'
+description: 'Build WhatsApp integrations with the Wachat API.'
+mode: 'wide'
 ---
 
-Welcome to the Wachat API. Use it to send messages, manage connected WhatsApp devices, work with contacts and templates, and receive webhook events from your workspace.
+<Hero
+  title="WhatsApp infrastructure for developers"
+  description="Connect your application to Wachat, send WhatsApp messages, and manage connected devices with a production-ready REST API."
+  primaryCta={{label: "Read the quickstart", url: "/guides/quickstart"}}
+  secondaryCta={{label: "Explore the API", url: "/api-reference"}}
+/>
+
+<CardGroup cols={3}>
+  <Card title="Quickstart" icon="play" href="/guides/quickstart">
+    Make your first authenticated request in a few minutes.
+  </Card>
+  <Card title="Authentication" icon="lock" href="/guides/authentication">
+    Learn how to create, store, and send your API token safely.
+  </Card>
+  <Card title="Webhooks" icon="brackets-curly" href="/guides/webhooks">
+    Receive incoming messages and delivery events in real time.
+  </Card>
+</CardGroup>
+
+## What you can build
+
+<CardGroup cols={3}>
+  <Card title="Account" icon="user-circle" href="/api-reference">
+    Read workspace identity, plan details, usage, limits, and enabled features.
+  </Card>
+  <Card title="Messaging" icon="message-circle" href="/api-reference">
+    Send messages and inspect message history and delivery status.
+  </Card>
+  <Card title="Templates" icon="file-text" href="/api-reference">
+    Create, manage, and send approved WhatsApp templates.
+  </Card>
+  <Card title="Contacts & CRM" icon="users" href="/api-reference">
+    Manage contacts, groups, conversations, and deals.
+  </Card>
+  <Card title="Campaigns & Broadcasts" icon="megaphone" href="/api-reference">
+    Send to audiences and track campaign and broadcast delivery.
+  </Card>
+  <Card title="Automation" icon="zap" href="/api-reference">
+    Manage auto-replies and enroll contacts in automation flows.
+  </Card>
+  <Card title="Devices & Media" icon="server" href="/api-reference">
+    Connect WhatsApp devices, pair with QR codes, and upload media.
+  </Card>
+  <Card title="Scheduling" icon="clock" href="/api-reference">
+    Schedule messages and manage upcoming sends.
+  </Card>
+  <Card title="Webhooks" icon="webhook" href="/api-reference">
+    Register endpoints for message, delivery, contact, and campaign events.
+  </Card>
+  <Card title="Reseller" icon="briefcase" href="/api-reference">
+    Create reseller workspaces and manage their API keys.
+  </Card>
+</CardGroup>
+
+<Warning>Keep your API token server-side. It grants access to your WhatsApp devices, messages, and workspace data.</Warning>
+
+<Tip>Every endpoint includes a live Try It playground with generated request examples.</Tip>
+
+## Base URL
+
+All API requests use this base URL:
+
+```text
+https://crm.wachat.net/api/v1
+```
+
+## Authentication
 
 Authenticate every request with your workspace API token:
 
@@ -12,12 +79,3 @@ Authorization: Bearer YOUR_API_TOKEN
 ```
 
 For message requests, use the `device_id` returned by `GET /devices`.
-## Base URL
-
-All API requests should be made to the following base URL:
-
-```bash
-https://crm.wachat.net/api/v1
-```
-
-
